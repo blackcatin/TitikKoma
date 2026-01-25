@@ -3,8 +3,13 @@
 @theme {
   --color-brand-red: #ba3c3d;
   --color-brand-dark: #351518;
+  --color-brand-darkbrown: #1a080a;
   --color-brand-orange: #c45730;
+  --color-brand-lightorange: #ffdb00;
+  --color-brand-yellow: #d9a03c;
   --color-brand-white: #ffffff;
+  --color-brand-dark-hover: #2a0f0f;
+
 }
 
 body {

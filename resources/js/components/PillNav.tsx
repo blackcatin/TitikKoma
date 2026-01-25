@@ -136,7 +136,7 @@ const PillNav: React.FC<PillNavProps> = ({
                     href="/"
                     ref={logoRef}
                     onMouseEnter={() => gsap.to(logoImgRef.current, { rotate: 360, duration: 0.5 })}
-                    className="w-10 h-10 rounded-full overflow-hidden bg-brand-dark p-1 flex items-center justify-center"
+                    className="w-10 h-10 rounded-full overflow-hidden bg-brand-yellow p-1 flex items-center justify-center"
                 >
                     <img
                         src={logo}
@@ -157,7 +157,7 @@ const PillNav: React.FC<PillNavProps> = ({
                                     className="relative flex items-center justify-center px-6 py-2 no-underline font-bold text-sm uppercase tracking-wider"
                                     style={{ color: activeHref === item.href ? '#fff' : 'var(--pill-text)' }}
                                 >
-                                    <span className="hover-circle absolute left-1/2 bottom-0 rounded-full z-0 bg-brand-red pointer-events-none" ref={el => { circleRefs.current[i] = el; }} />
+                                    <span className="hover-circle absolute left-1/2 bottom-0 rounded-full z-0 bg-brand-yellow pointer-events-none" ref={el => { circleRefs.current[i] = el; }} />
                                     <span className="relative z-10 flex flex-col items-center">
                                         <span className="pill-label">{item.label}</span>
                                         <span className="pill-label-hover absolute opacity-0 text-white font-black">{item.label}</span>
