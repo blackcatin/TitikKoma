@@ -39,22 +39,19 @@ const SplitText: React.FC<SplitTextProps> = ({
   const ref = useRef<HTMLElement | null>(null);
   const [fontsLoaded, setFontsLoaded] = useState(false);
 
-  // Perbaikan Font Loading Effect
   useEffect(() => {
     let isMounted = true;
     document.fonts.ready.then(() => {
       if (isMounted) setFontsLoaded(true);
     }).catch((err) => {
       console.error('Font loading failed:', err);
-      if (isMounted) setFontsLoaded(true); // Tetap jalankan animasi meski font gagal
+      if (isMounted) setFontsLoaded(true); 
     });
     return () => { isMounted = false; };
   }, []);
 
   useGSAP(() => {
     if (!ref.current || !fontsLoaded) return;
-
-    // Inisialisasi SplitText
     const split = new GSAPSplitText(ref.current, {
       type: splitType,
       charsClass: 'split-char',
@@ -62,13 +59,11 @@ const SplitText: React.FC<SplitTextProps> = ({
       linesClass: 'split-line'
     });
 
-    // Menentukan target animasi berdasarkan splitType
     const targets = 
       splitType === 'chars' ? split.chars :
       splitType === 'words' ? split.words :
       split.lines;
 
-    // Create Animation with ScrollTrigger
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: ref.current,
@@ -89,15 +84,12 @@ const SplitText: React.FC<SplitTextProps> = ({
         onComplete: onLetterAnimationComplete
       }
     );
-
-    // Cleanup otomatis dilakukan oleh useGSAP, 
-    // namun revert manual tetap aman untuk SplitText.
     return () => {
       split.revert();
     };
   }, { scope: ref, dependencies: [text, fontsLoaded, splitType, delay, duration, ease] });
 
-  const Tag = tag as any; // Cast ke any untuk menghindari error JSX intrinsic
+  const Tag = tag as any; 
 
   return (
     <Tag
