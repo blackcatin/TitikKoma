@@ -105,7 +105,6 @@ const FallingText: React.FC<FallingTextProps> = ({
         restitution: 0.6,
         frictionAir: 0.02,
         friction: 0.1,
-        // Chamfer membuat sudut fisik objek membulat (cocok untuk bubble)
         chamfer: { radius: rect.height / 2 } 
       });
 

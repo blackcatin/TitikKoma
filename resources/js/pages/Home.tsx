@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import PillNav from '../components/PillNav';
-import RippleGrid from '../components/RippleGrid';
+import RippleGrid from '../components/Animation/RippleGrid';
 import SplitText from '../components/Animation/SplitText';
 import { usePage } from '@inertiajs/react';
 import myLogo from '../../assets/icons/Logo.png';
@@ -11,54 +11,49 @@ import mockup3 from '../../assets/img/mockup2.jpg';
 import { LogoLoop } from '@/components/Animation/LogoLoop';
 import AnimatedContent from '@/components/Animation/AnimatedContent';
 import FallingText from '@/components/Animation/FallingText';
+import { testimonialData } from '../data/TestimonialData';
+import Footer from '@/components/Footer';
 
-const testimonialData = [
-    {
-        name: "Aris Munandar",
-        role: "Operations Manager",
-        text: "Integrasi sistem manajemen gudang yang dibangun Titik Koma berhasil memangkas waktu input data hingga 40%. Arsitektur sistemnya sangat stabil dan mudah dioperasikan oleh tim lapangan kami."
-    },
-    {
-        name: "Clarissa Utama",
-        role: "Startup Founder",
-        text: "Iterasi produk yang cepat dan komunikasi teknis yang transparan. Titik Koma berhasil mentransformasi MVP kami menjadi platform siap rilis dengan performa yang sangat impresif."
-    },
-    {
-        name: "Bambang Sujatmiko",
-        role: "SME Owner",
-        text: "Solusi Point of Sale berbasis Computer Vision yang mereka kembangkan benar-benar inovatif. Akurasi deteksi produknya sangat tinggi, sangat membantu otomatisasi transaksi di toko kami."
-    },
-    {
-        name: "Dian Sasmita",
-        role: "Product Manager",
-        text: "UI/UX yang dirancang tidak hanya estetis, tetapi juga sangat intuitif. Kami melihat peningkatan signifikan pada retensi pengguna sejak mengimplementasikan desain baru dari Titik Koma."
-    },
-];
-
-const FAQItem = ({ question, answer }: { question: string, answer: string }) => {
+const FAQItem = ({ question, answer, icon }: { question: string, answer: string, icon?: string }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <div className={`group border-b border-white/5 transition-all duration-500 ${isOpen ? 'bg-white/2' : ''}`}>
+        <div
+            className={`group rounded-[2rem] border transition-all duration-500 overflow-hidden 
+            ${isOpen
+                    ? 'bg-white/8 border-brand-yellow/40 shadow-2xl shadow-brand-yellow/5'
+                    : 'bg-white/2 border-white/5 hover:border-white/10'}`}
+        >
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="w-full flex justify-between items-center py-8 text-left outline-none group"
+                className="w-full flex justify-between items-center p-7 md:p-9 text-left outline-none group/btn"
             >
-                <h4 className={`text-xl md:text-2xl font-bold transition-all duration-300 ${isOpen ? 'text-brand-yellow italic' : 'text-white group-hover:text-brand-yellow/70'}`}>
-                    {question}
-                </h4>
-                <div className={`transition-transform duration-500 text-brand-yellow ${isOpen ? 'rotate-180' : 'rotate-0'}`}>
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="m6 9 6 6 6-6" />
-                    </svg>
+                <div className="flex items-center gap-6">
+                    <div className={`w-12 h-12 rounded-full flex items-center justify-center text-xl transition-all duration-500
+                        ${isOpen ? 'bg-brand-yellow text-brand-darkbrown scale-110' : 'bg-white/5 text-gray-400 group-hover:bg-white/10'}`}>
+                        {icon}
+                    </div>
+                    <h4 className={`text-lg md:text-xl font-bold transition-colors duration-300 pr-4 
+                        ${isOpen ? 'text-brand-yellow italic' : 'text-white'}`}>
+                        {question}
+                    </h4>
+                </div>
+
+                <div className={`relative w-6 h-6 flex items-center justify-center transition-transform duration-500 ${isOpen ? 'rotate-180' : ''}`}>
+                    <div className="absolute w-5 h-0.5 bg-brand-yellow rounded-full" />
+                    <div className={`absolute w-5 h-0.5 bg-brand-yellow rounded-full transition-transform duration-500 ${isOpen ? 'rotate-0' : 'rotate-90'}`} />
                 </div>
             </button>
 
-            <div className={`grid transition-all duration-500 ease-in-out ${isOpen ? 'grid-rows-[1fr] opacity-100 pb-8' : 'grid-rows-[0fr] opacity-0'}`}>
+            <div className={`grid transition-all duration-500 ease-in-out ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}>
                 <div className="overflow-hidden">
-                    <p className="text-gray-400 leading-relaxed text-lg max-w-2xl border-l border-brand-yellow/30 pl-6">
-                        {answer}
-                    </p>
+                    <div className="px-9 pb-9 pt-0 ml-18">
+                        <div className="border-l-2 border-brand-yellow/20 pl-6 py-2">
+                            <p className="text-gray-400 leading-relaxed text-base md:text-lg">
+                                {answer}
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -67,6 +62,25 @@ const FAQItem = ({ question, answer }: { question: string, answer: string }) => 
 
 export default function Home() {
     const { url } = usePage();
+    const nextSectionRef = useRef<HTMLDivElement>(null);
+
+    const faqData = [
+        {
+            q: "Berapa lama estimasi waktu pengerjaan proyek?",
+            a: "Durasi proyek bergantung pada kompleksitas dan ruang lingkup. Rata-rata berkisar antara 2–12 minggu, dengan timeline yang transparan sejak awal.",
+            icon: "⏳"
+        },
+        {
+            q: "Bagaimana alur komunikasi selama proyek?",
+            a: "Kami menggunakan sistem komunikasi terstruktur melalui weekly update, progress board, dan satu PIC teknis agar tetap efisien dan jelas.",
+            icon: "💬"
+        },
+        {
+            q: "Apakah bisa request revisi pengembangan?",
+            a: "Ya. Setiap proyek memiliki kuota revisi terdefinisi, dan perubahan besar akan kami diskusikan secara terbuka sebelum dieksekusi.",
+            icon: "🔄"
+        }
+    ];
 
     return (
         <div className="relative min-h-screen bg-brand-darkbrown text-white overflow-x-hidden selection:bg-brand-red font-sans">
@@ -101,7 +115,6 @@ export default function Home() {
             </header>
 
             <main className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 flex flex-col">
-
                 <AnimatedContent distance={60} direction="vertical" duration={1.2} delay={0.2}>
                     <section className="flex flex-col items-center justify-center text-center min-h-screen pt-24 pb-12">
                         <div className="max-w-5xl mb-10">
@@ -121,18 +134,23 @@ export default function Home() {
                             Where complex ideas meet structured digital solutions. We bridge the gap between innovation and implementation.
                         </p>
 
-                        <button className="bg-brand-yellow hover:bg-[#d49d00] text-brand-darkbrown px-12 py-5 rounded-2xl font-black transition-all shadow-2xl shadow-brand-yellow/20 active:scale-95 text-base uppercase">
+                        <button
+                            onClick={() => window.location.href = '/services'}
+                            className="bg-brand-yellow hover:bg-[#d49d00] text-brand-darkbrown px-12 py-5 rounded-2xl font-black transition-all shadow-2xl shadow-brand-yellow/20 active:scale-95 text-base uppercase">
                             Get Started
                         </button>
 
-                        <div className="animate-bounce mt-24 text-brand-white opacity-60 flex flex-col items-center">
+                        <div
+                            className="animate-bounce mt-24 text-brand-white opacity-60 flex flex-col items-center cursor-pointer hover:opacity-100 transition-opacity"
+                            onClick={() => nextSectionRef.current?.scrollIntoView({ behavior: 'smooth' })}
+                        >
                             <span className="text-[10px] tracking-[0.3em] uppercase mb-2">Explore More</span>
                             <div className="text-xl">↓</div>
                         </div>
                     </section>
                 </AnimatedContent>
 
-                <section className="min-h-screen flex flex-col lg:flex-row items-center justify-between py-32 gap-20">
+                <section ref={nextSectionRef} className="min-h-screen flex flex-col lg:flex-row items-center justify-between py-32 gap-20">
                     <AnimatedContent distance={100} direction="horizontal" reverse={true} className="w-full lg:w-1/2">
                         <div className="flex flex-col justify-center space-y-8 z-20">
                             <div className="inline-block px-5 py-1.5 rounded-full border border-brand-yellow/30 bg-brand-yellow/5 text-brand-yellow text-[10px] font-bold tracking-[0.2em] uppercase self-start">
@@ -144,13 +162,14 @@ export default function Home() {
                             </h2>
 
                             <p className="text-gray-400 text-lg leading-relaxed max-w-md border-l border-brand-yellow/20 pl-6">
-                                Lihat bagaimana kami mentransformasi ide menjadi produk digital nyata,
-                                mulai dari sistem manajemen <strong className="text-white font-semibold">E-Commerce</strong> hingga
-                                creative portfolio <strong className="text-white font-semibold">Valorant Character</strong>.
+                                Lihat bagaimana kami mentransformasi ide menjadi produk digital nyata.
                             </p>
 
                             <div className="pt-6">
-                                <button className="group flex items-center gap-4 bg-white/5 border border-white/10 hover:border-brand-yellow/50 px-10 py-4 rounded-2xl font-bold transition-all backdrop-blur-md active:scale-95">
+                                <button
+                                    className="group flex items-center gap-4 bg-white/5 border border-white/10 hover:border-brand-yellow/50 px-10 py-4 rounded-2xl font-bold transition-all backdrop-blur-md active:scale-95"
+                                    onClick={() => window.location.href = '/portfolio'}
+                                >
                                     <span className="text-sm tracking-widest">VIEW ALL PORTFOLIO</span>
                                     <span className="text-brand-yellow group-hover:translate-x-2 transition-transform">→</span>
                                 </button>
@@ -162,22 +181,12 @@ export default function Home() {
                         <div className="flex justify-center lg:justify-end items-center relative">
                             <div className="relative w-85 h-100 md:w-120 md:h-87.5">
                                 <div className="absolute inset-0 bg-brand-red/10 blur-[120px] rounded-full -z-10 opacity-50"></div>
-                                <CardSwap
-                                    width="100%"
-                                    height="100%"
-                                    delay={3500}
-                                    cardDistance={40}
-                                    verticalDistance={50}
-                                >
+                                <CardSwap width="100%" height="100%" delay={3500} cardDistance={40} verticalDistance={50}>
                                     {[mockup1, mockup2, mockup3].map((img, i) => (
                                         <Card key={i} className="bg-[#150a0c] border-white/10 shadow-2xl overflow-hidden group">
-                                            <img
-                                                src={img}
-                                                alt={`Project ${i}`}
-                                                className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500"
-                                            />
-                                            <div className="absolute bottom-0 left-0 w-full p-8 bg-linear-to-t from-black via-black/90 to-transparent">
-                                                <h4 className="text-white font-bold text-2xl mb-1">
+                                            <img src={img} alt={`Project ${i}`} className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
+                                            <div className="absolute bottom-0 left-0 w-full p-8 bg-linear-to-t from-black via-black/90 to-transparent text-left">
+                                                <h4 className="text-white font-bold text-2xl mb-1 truncate">
                                                     {i === 0 ? "E-Commerce" : i === 1 ? "Creative Portfolio" : "Brand Profile"}
                                                 </h4>
                                                 <p className="text-[10px] text-brand-red font-bold uppercase tracking-[0.2em]">Digital Solution</p>
@@ -190,7 +199,7 @@ export default function Home() {
                     </AnimatedContent>
                 </section>
 
-                <section className="py-24 flex flex-col items-center justify-center bg-brand-darkbrown px-6">
+                <section className="py-24 flex flex-col items-center justify-center px-6">
                     <AnimatedContent distance={50} direction="vertical">
                         <div className="text-center mb-10">
                             <h2 className="text-5xl md:text-7xl font-black italic uppercase tracking-tighter text-white leading-none">
@@ -205,7 +214,6 @@ export default function Home() {
                             <h3 className="text-4xl md:text-6xl font-black text-white italic tracking-tighter uppercase">Titik Koma</h3>
                             <p className="text-xs text-brand-yellow tracking-[1em] uppercase mt-2">Solution Ecosystem</p>
                         </div>
-
                         <FallingText
                             text="Web-Development AI-Integration MLOps Automation UI/UX-Design Mobile-Apps Branding Data-Analytics IoT-Expert Cloud-System"
                             highlightWords={["Web-Development", "AI-Integration", "MLOps", "Automation"]}
@@ -215,7 +223,6 @@ export default function Home() {
                             mouseConstraintStiffness={0.1}
                         />
                         <div className="absolute inset-0 rounded-[2.5rem] border border-brand-yellow/0 group-hover:border-brand-yellow/20 transition-colors pointer-events-none" />
-
                         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-[9px] text-white/40 uppercase tracking-[0.4em] pointer-events-none flex items-center gap-2">
                             <span className="w-1 h-1 bg-brand-yellow rounded-full animate-pulse" />
                             Drag capsules to interact
@@ -236,10 +243,10 @@ export default function Home() {
                 <AnimatedContent distance={60} threshold={0.2}>
                     <section className="py-32 border-y border-white/5 bg-brand-darkbrown/30 rounded-[4rem] mb-20 flex flex-col items-center">
                         <div className="text-center mb-20 px-6">
-                            <h2 className="text-4xl md:text-6xl font-black uppercase italic text-white mb-4 tracking-tighter">
+                            <h2 className="text-4xl md:text-6xl font-black uppercase italic text-white mb-4 tracking-tighter text-center">
                                 Apa kata mereka?
                             </h2>
-                            <p className="text-brand-yellow tracking-[0.3em] text-[10px] font-bold uppercase">
+                            <p className="text-brand-yellow tracking-[0.3em] text-[10px] font-bold uppercase text-center">
                                 Kemitraan Strategis & Solusi Terukur
                             </p>
                         </div>
@@ -253,24 +260,18 @@ export default function Home() {
                             fadeOut={true}
                             fadeOutColor="#1e0b0e"
                             renderItem={(item: any) => (
-                                <div className="w-[320px] md:w-105 bg-white/5 p-10 rounded-[2.5rem] border border-white/10 backdrop-blur-md h-full flex flex-col justify-between whitespace-normal text-left">
-                                    <div>
-                                        <div className="text-brand-yellow text-4xl mb-4 opacity-30 font-serif">“</div>
-                                        <p className="text-gray-200 italic text-base md:text-lg leading-relaxed mb-8">
-                                            {item.text}
-                                        </p>
+                                <div className="group w-[320px] md:w-105 h-full flex flex-col justify-between rounded-[2.75rem] bg-linear-to-br from-white/8 to-white/2 border border-white/10 backdrop-blur-xl p-10 transition-all duration-500 hover:-translate-y-2 hover:border-brand-yellow/40 hover:shadow-[0_30px_80px_-20px_rgba(196,87,48,0.25)] text-left whitespace-normal">
+                                    <div className="relative mb-6">
+                                        <span className="absolute -top-6 -left-2 text-[6rem] leading-none font-serif text-brand-yellow/10 select-none">“</span>
+                                        <p className="relative text-gray-200 italic text-base md:text-lg leading-relaxed">{item.text}</p>
                                     </div>
-                                    <div className="flex items-center gap-4 border-t border-white/5 pt-6">
-                                        <div className="w-10 h-10 shrink-0 rounded-full bg-brand-yellow/20 flex items-center justify-center font-bold text-brand-yellow text-xs uppercase">
+                                    <div className="flex items-center gap-4 pt-6 border-t border-white/10 text-left">
+                                        <div className="relative w-11 h-11 rounded-full bg-linear-to-br from-brand-yellow to-orange-400 flex items-center justify-center font-black text-brand-darkbrown text-sm uppercase">
                                             {item.name.charAt(0)}
                                         </div>
-                                        <div className="overflow-hidden">
-                                            <h4 className="font-bold text-white text-sm leading-none mb-1.5 truncate">
-                                                {item.name}
-                                            </h4>
-                                            <p className="text-gray-500 text-[10px] uppercase tracking-widest truncate">
-                                                {item.role}
-                                            </p>
+                                        <div className="min-w-0 text-left">
+                                            <h4 className="font-bold text-white text-sm leading-none mb-1 truncate">{item.name}</h4>
+                                            <p className="text-gray-400 text-[10px] uppercase tracking-[0.25em] truncate">{item.role}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -289,39 +290,62 @@ export default function Home() {
                     </section>
                 </AnimatedContent>
 
-                <section className="py-40 flex flex-col lg:flex-row gap-20 px-4 md:px-0 border-t border-white/5">
-                    <AnimatedContent distance={100} direction="vertical" className="lg:w-5/12">
-                        <div className="sticky top-32">
-                            <h2 className="text-5xl md:text-7xl font-black text-white leading-tight mb-8 uppercase italic tracking-tighter">
-                                Punya Pertanyaan Teknis? <br />
-                                <span className="text-brand-yellow">Tanya Kami.</span>
-                            </h2>
-                            <p className="text-brand-yellow/80 text-lg leading-relaxed max-w-md border-l-2 border-brand-yellow pl-6 mb-10">
-                                Konsultasikan kebutuhan digitalmu secara gratis. Kami siap membantu dari fase perancangan hingga peluncuran sistem yang stabil.
-                            </p>
+                <section className="relative py-28 md:py-32 border-t border-white/5 overflow-hidden">
+                    <div className="absolute top-0 left-1/4 w-96 h-96 bg-brand-yellow/5 blur-[120px] rounded-full pointer-events-none" />
+                    <div className="relative flex flex-col lg:flex-row gap-14 lg:gap-20 px-6 md:px-12 max-w-7xl mx-auto">
+                        <AnimatedContent distance={50} direction="vertical" className="lg:w-5/12">
+                            <div className="sticky top-24 space-y-6">
 
-                            <button
-                                onClick={() => window.location.href = '/contact'}
-                                className="group inline-flex items-center gap-4 text-white hover:text-brand-yellow transition-colors"
-                            >
-                                <span className="text-xl font-bold italic uppercase tracking-widest underline decoration-brand-yellow/30 underline-offset-8 group-hover:decoration-brand-yellow">Mulai Konsultasi Gratis</span>
-                                <span className="text-2xl group-hover:translate-x-2 transition-transform">→</span>
-                            </button>
+                                <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full border border-brand-yellow/20 bg-brand-yellow/5 text-brand-yellow text-[10px] font-black uppercase tracking-[0.3em]">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-brand-yellow animate-pulse" />
+                                    Support Center
+                                </div>
+
+                                <h2 className="text-5xl md:text-6xl xl:text-7xl font-black text-white leading-[0.95] uppercase italic tracking-tighter">
+                                    Punya<br />
+                                    <span className="text-brand-yellow">Pertanyaan?</span>
+                                </h2>
+
+                                <p className="text-gray-400 text-base md:text-lg leading-relaxed max-w-sm">
+                                    Jawaban singkat untuk pertanyaan teknis yang paling sering
+                                    ditanyakan oleh calon partner kami.
+                                </p>
+
+                                <div className="pt-2">
+                                    <button
+                                        onClick={() => window.location.href = '/contact'}
+                                        className="group inline-flex items-center gap-5 px-8 py-4 rounded-xl bg-white text-brand-darkbrown font-black uppercase tracking-widest hover:bg-brand-yellow transition-all duration-300 shadow-xl"
+                                    >
+                                        <span>Mulai Konsultasi</span>
+                                        <span className="w-7 h-7 rounded-full bg-brand-darkbrown text-white flex items-center justify-center group-hover:translate-x-1 transition-transform">
+                                            →
+                                        </span>
+                                    </button>
+                                </div>
+
+                            </div>
+                        </AnimatedContent>
+
+                        <div className="lg:w-7/12 flex flex-col gap-4">
+                            {faqData.map((faq, i) => (
+                                <AnimatedContent
+                                    key={i}
+                                    delay={i * 0.08}
+                                    distance={30}
+                                    direction="vertical"
+                                >
+                                    <FAQItem
+                                        question={faq.q}
+                                        answer={faq.a}
+                                        icon={faq.icon}
+                                    />
+                                </AnimatedContent>
+                            ))}
                         </div>
-                    </AnimatedContent>
-
-                    <div className="lg:w-7/12 space-y-2">
-                        {[
-                            { q: "Berapa lama estimasi waktu pengerjaan proyek?", a: "..." },
-                            { q: "Bagaimana prosedur revisi selama masa pengembangan?", a: "..." },
-                            { q: "Bagaimana kebijakan jika terjadi pembatalan proyek?", a: "..." }
-                        ].map((faq, i) => (
-                            <AnimatedContent key={i} delay={i * 0.1} distance={20} direction="vertical">
-                                <FAQItem question={faq.q} answer={faq.a} />
-                            </AnimatedContent>
-                        ))}
                     </div>
-                </section>           </main>
+                </section>
+            </main>
+            <Footer />
         </div>
     );
 }

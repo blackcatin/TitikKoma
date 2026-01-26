@@ -1,44 +1,48 @@
-export const coreServices = [
-    { 
-        id: 1,
-        title: "Enterprise Web", 
-        icon: "🚀",
-        desc: "Sistem web kustom berskala besar untuk efisiensi bisnis.",
-        fullDesc: "Kami membangun arsitektur web yang scalable menggunakan arsitektur modern (Microservices/Monolith terstruktur) untuk kebutuhan Enterprise.",
-        techStack: "Laravel, React, PostgreSQL, Redis",
-        target: "Startup, Korporasi, Institusi",
-        budget: "Mulai dari Rp 15jt",
-        work: ["Arsitektur Database", "Integrasi API", "Dashboard Admin", "Keamanan Data"]
-    },
-    { 
-        id: 2,
-        title: "AI & Automation", 
-        icon: "🤖",
-        desc: "Otomasi cerdas menggunakan Machine Learning & Computer Vision.",
-        fullDesc: "Implementasi AI untuk memecahkan masalah nyata, mulai dari deteksi objek hingga pemrosesan bahasa alami (NLP).",
-        techStack: "Python, TensorFlow, PyTorch, OpenCV",
-        target: "Sektor Industri, Retail, Healthcare",
-        budget: "Custom Quote",
-        work: ["Model Training", "Dataset Preparation", "API Deployment", "Edge Computing"]
-    },
-    { 
-        id: 3,
-        title: "UI/UX Design", 
-        icon: "🎨",
-        desc: "Desain antarmuka modern dengan fokus pada pengalaman pengguna.",
-        fullDesc: "Kami merancang produk digital yang tidak hanya indah secara visual, tetapi juga intuitif dan mempermudah konversi pengguna.",
-        techStack: "Figma, Adobe Creative Suite, Framer",
-        target: "SaaS Founders, Mobile Apps, Re-branding",
-        budget: "Mulai dari Rp 5jt",
-        work: ["User Research", "Wireframing", "High-Fidelity Design", "Design System"]
-    }
-];
-
 export const technicalSpecialties = [
-    { title: "Frontend", skills: ["React Developer", "Next.js Specialist", "Tailwind UI Engineer", "Web Animation Expert"] },
-    { title: "Backend", skills: ["API Engineer", "Laravel Developer", "Node.js/Express", "Database Architect"] },
-    { title: "AI & Data", skills: ["Machine Learning", "Computer Vision", "NLP Engineer", "Data Scientist"] },
-    { title: "UI/UX", skills: ["Product Designer", "UX Researcher", "Design System", "UX Writer"] },
-    { title: "DevOps", skills: ["Cloud Architect", "CI/CD Engineer", "Server Admin", "Security Engineer"] },
-    { title: "Product", skills: ["Technical Consultant", "QA Automation", "System Integrator", "Maintenance"] }
+    { title: "Frontend Developer", category: "Frontend", desc: "Membangun antarmuka web modern yang responsif dan cepat." },
+    { title: "React Developer", category: "Frontend", desc: "Pengembangan SPA menggunakan React dengan state management optimal." },
+    { title: "Next.js Developer", category: "Frontend", desc: "Optimasi SEO, SSR, dan performa web berbasis Next.js." },
+    { title: "Vue Developer", category: "Frontend", desc: "Pengembangan UI reaktif dan scalable dengan Vue.js." },
+    { title: "UI Engineer", category: "Frontend", desc: "Menjembatani desain dan kode menjadi UI yang presisi." },
+    { title: "Tailwind Specialist", category: "Frontend", desc: "Styling cepat dan konsisten menggunakan Tailwind CSS." },
+    { title: "Web Animation Engineer", category: "Frontend", desc: "Menciptakan animasi web halus dan interaktif." },
+
+    { title: "Backend Developer", category: "Backend", desc: "Mengembangkan logika server dan sistem backend yang andal." },
+    { title: "API Engineer", category: "Backend", desc: "Merancang RESTful & GraphQL API standar industri." },
+    { title: "Laravel Developer", category: "Backend", desc: "Pengembangan sistem backend PHP modern berbasis Laravel." },
+    { title: "Node.js Developer", category: "Backend", desc: "Backend scalable berbasis JavaScript runtime Node.js." },
+    { title: "Express Engineer", category: "Backend", desc: "Pembuatan API ringan dan cepat menggunakan Express.js." },
+    { title: "Database Engineer", category: "Backend", desc: "Perancangan dan optimasi database relasional & NoSQL." },
+    { title: "Authentication Specialist", category: "Backend", desc: "Keamanan sistem login, JWT, OAuth, dan access control." },
+
+    { title: "Android Developer", category: "Mobile", desc: "Pengembangan aplikasi Android native dan modern." },
+    { title: "iOS Developer", category: "Mobile", desc: "Membangun aplikasi iOS dengan performa optimal." },
+    { title: "Flutter Developer", category: "Mobile", desc: "Aplikasi cross-platform cepat dengan Flutter." },
+    { title: "React Native Developer", category: "Mobile", desc: "Aplikasi mobile lintas platform berbasis React." },
+
+    { title: "UI Designer", category: "UI/UX", desc: "Merancang tampilan antarmuka yang estetis dan usable." },
+    { title: "UX Researcher", category: "UI/UX", desc: "Riset perilaku pengguna untuk pengalaman terbaik." },
+    { title: "UX Writer", category: "UI/UX", desc: "Menyusun microcopy yang jelas dan user-friendly." },
+    { title: "Design System Engineer", category: "UI/UX", desc: "Membangun sistem desain konsisten dan scalable." },
+    { title: "Product Designer", category: "UI/UX", desc: "Menggabungkan bisnis, user, dan teknologi dalam desain." },
+
+    { title: "Machine Learning Engineer", category: "AI & Data", desc: "Membangun dan mengintegrasikan model machine learning." },
+    { title: "AI Engineer", category: "AI & Data", desc: "Implementasi solusi kecerdasan buatan end-to-end." },
+    { title: "Data Analyst", category: "AI & Data", desc: "Mengolah data menjadi insight yang actionable." },
+    { title: "Data Scientist", category: "AI & Data", desc: "Analisis data lanjutan dan predictive modeling." },
+    { title: "Computer Vision Engineer", category: "AI & Data", desc: "Solusi visual recognition dan image processing." },
+    { title: "NLP Engineer", category: "AI & Data", desc: "Pengolahan bahasa alami untuk sistem cerdas." },
+
+    { title: "DevOps Engineer", category: "DevOps & System", desc: "Otomatisasi deployment dan workflow CI/CD." },
+    { title: "Cloud Engineer", category: "DevOps & System", desc: "Manajemen infrastruktur cloud yang scalable." },
+    { title: "CI/CD Engineer", category: "DevOps & System", desc: "Pipeline build, test, dan deploy otomatis." },
+    { title: "Server Administrator", category: "DevOps & System", desc: "Pengelolaan server dan sistem produksi." },
+    { title: "System Integrator", category: "DevOps & System", desc: "Integrasi berbagai sistem dan layanan." },
+    { title: "Security Engineer", category: "DevOps & System", desc: "Perlindungan sistem dari ancaman keamanan." },
+
+    { title: "Product Engineer", category: "Product & Support", desc: "Mengembangkan produk dari ide hingga production." },
+    { title: "Technical Consultant", category: "Product & Support", desc: "Konsultasi teknis sesuai kebutuhan bisnis." },
+    { title: "QA Engineer", category: "Product & Support", desc: "Menjamin kualitas produk sebelum rilis." },
+    { title: "Automation Tester", category: "Product & Support", desc: "Pengujian otomatis untuk stabilitas sistem." },
+    { title: "Maintenance Engineer", category: "Product & Support", desc: "Perawatan dan peningkatan sistem berkelanjutan." },
 ];
