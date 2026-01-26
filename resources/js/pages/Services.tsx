@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { usePage } from '@inertiajs/react';
-import { Search } from 'lucide-react'; 
+import { Search } from 'lucide-react';
 import PillNav from '@/components/PillNav';
 import Particles from '@/components/Animation/Particles';
 import AnimatedContent from '@/components/Animation/AnimatedContent';
@@ -9,6 +9,8 @@ import ServiceModal from '@/components/services/Modal';
 import SpotlightCard from '@/components/services/SpotlightCard';
 import { technicalSpecialties } from '../data/ServicesData';
 import logo from '../../assets/icons/Logo.png';
+import Footer from '@/components/Footer';
+import karakter from '../../assets/img/cartoo.png'; // Import sudah benar
 
 export default function Services() {
     const { url } = usePage();
@@ -17,6 +19,7 @@ export default function Services() {
     const [selectedService, setSelectedService] = useState<any>(null);
 
     const filters = ["All", "Frontend", "Backend", "AI & Data", "UI/UX"];
+    
     const filteredSpecialties = useMemo(() => {
         return technicalSpecialties.filter(item => {
             const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -55,7 +58,6 @@ export default function Services() {
             </header>
 
             <main className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 flex flex-col">
-
                 <ServiceHero />
                 <section className="py-24">
                     <div className="flex flex-col items-center mb-16 space-y-10">
@@ -74,14 +76,15 @@ export default function Services() {
                                 onChange={(e) => setSearchQuery(e.target.value)}
                             />
                         </div>
+
                         <div className="flex flex-wrap justify-center gap-3">
                             {filters.map(filter => (
                                 <button
                                     key={filter}
                                     onClick={() => setActiveFilter(filter)}
                                     className={`px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all ${activeFilter === filter
-                                            ? 'bg-brand-yellow text-brand-darkbrown'
-                                            : 'bg-white/5 text-gray-400 hover:bg-white/10'
+                                        ? 'bg-brand-yellow text-brand-darkbrown'
+                                        : 'bg-white/5 text-gray-400 hover:bg-white/10'
                                         }`}
                                 >
                                     {filter}
@@ -94,7 +97,7 @@ export default function Services() {
                         {filteredSpecialties.length > 0 ? (
                             filteredSpecialties.map((item, i) => (
                                 <AnimatedContent
-                                    key={i} 
+                                    key={i}
                                     delay={i * 0.05}
                                     distance={20}
                                     direction="vertical"
@@ -130,18 +133,48 @@ export default function Services() {
                     </div>
                 </section>
 
-                <section className="py-40 flex flex-col items-center text-center">
-                    <AnimatedContent distance={40} direction="vertical">
-                        <h2 className="text-4xl md:text-6xl font-black italic uppercase text-white mb-8">Siap Memulai Proyek Anda?</h2>
-                        <button
-                            onClick={() => window.location.href = '/contact'}
-                            className="bg-brand-yellow text-brand-darkbrown font-black px-12 py-5 rounded-2xl hover:bg-white hover:scale-105 transition-all text-lg shadow-2xl shadow-brand-yellow/20"
-                        >
-                            KONSULTASI GRATIS SEKARANG
-                        </button>
-                    </AnimatedContent>
+                <section className="relative py-40 overflow-hidden">
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-brand-yellow/5 blur-[120px] rounded-full pointer-events-none" />
+                    
+                    <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-center gap-12 md:gap-24">
+
+                        <AnimatedContent distance={60} direction="horizontal" className="relative order-2 md:order-1">
+                            <div className="relative group">
+                                <div className="absolute inset-0 bg-brand-yellow/10 rounded-full blur-3xl scale-75 group-hover:scale-110 transition-transform duration-700" />
+                                <img
+                                    src={karakter} 
+                                    alt="Character Illustration"
+                                    className="relative w-64 md:w-85 h-auto object-contain animate-float"
+                                    style={{ filter: 'drop-shadow(0 20px 50px rgba(0,0,0,0.5))' }}
+                                />
+                            </div>
+                        </AnimatedContent>
+
+                        <div className="text-center md:text-left order-1 md:order-2">
+                            <AnimatedContent distance={40} direction="vertical">
+                                <div className="inline-block px-4 py-1.5 rounded-full border border-brand-yellow/30 bg-brand-yellow/5 text-brand-yellow text-[10px] font-black uppercase tracking-[0.3em] mb-6">
+                                    Ready to scale?
+                                </div>
+
+                                <h2 className="text-5xl md:text-7xl font-black italic uppercase text-white mb-8 leading-[0.9] tracking-tighter">
+                                    Siap Memulai <br />
+                                    <span className="text-brand-yellow">Proyek Anda?</span>
+                                </h2>
+
+                                <button
+                                    onClick={() => window.location.href = '/contact'}
+                                    className="group flex items-center gap-6 bg-brand-yellow text-brand-darkbrown font-black px-10 py-5 rounded-2xl hover:bg-white hover:scale-105 transition-all text-sm md:text-base shadow-2xl shadow-brand-yellow/20"
+                                >
+                                    KONSULTASI GRATIS SEKARANG
+                                    <span className="group-hover:translate-x-2 transition-transform">→</span>
+                                </button>
+                            </AnimatedContent>
+                        </div>
+                    </div>
                 </section>
             </main>
+
+            <Footer />
 
             <ServiceModal
                 isOpen={!!selectedService}
