@@ -1,8 +1,8 @@
 @import "tailwindcss";
-
 @plugin "tailwindcss-animate";
 
 @custom-variant dark (&:is(.dark *));
+@import "tw-animate-css";
 
 @theme {
   --color-brand-red: #ba3c3d;
@@ -138,11 +138,19 @@ body {
 @layer base {
   * {
     @apply border-border outline-ring/50;
-
   }
   body {
-    @apply bg-background text-foreground;
-
+    background-color: var(--color-brand-darkbrown);
+    color: white;
+    font-family: sans-serif;
+    min-height: 100vh;
+    position: relative; 
   }
-
+  
+  button, a {
+    position: relative;
+    z-index: 50; 
+    pointer-events: auto !important; 
+    cursor: pointer;
+  }
 }
