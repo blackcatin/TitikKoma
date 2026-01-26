@@ -2,20 +2,12 @@
 
 > **Bridging the gap between complex innovation and structured implementation.**
 
-**Titik Koma Digital Studio** adalah studio teknologi yang berfokus pada perancangan dan pengembangan produk digital yang terstruktur, skalabel, dan berkelanjutan. Kami membantu bisnis dan organisasi menerjemahkan ide kompleks menjadi solusi digital yang rapi, stabil, dan siap berkembang.
-
-Dengan pendekatan **engineering-driven design**, Titik Koma mengedepankan keseimbangan antara estetika, performa, dan kejelasan sistem.
-
----
-
 ## 🚀 Tentang Proyek
 
-Website **Titik Koma Digital Studio** merupakan platform resmi yang menampilkan portofolio, kapabilitas teknis, serta pendekatan kerja kami dalam membangun produk digital.
-
-Proyek ini dirancang dengan filosofi **Minimalist–Premium Interface**, dipadukan dengan interaksi berbasis fisika (*physics-based interactions*), animasi presisi tinggi, serta arsitektur kode yang bersih dan maintainable.
-
-Website ini tidak hanya berfungsi sebagai media presentasi, tetapi juga sebagai representasi standar kualitas engineering yang kami terapkan pada setiap proyek klien.
-
+* Website **Titik Koma Digital Studio** merupakan platform resmi yang menampilkan portofolio, kapabilitas teknis, serta pendekatan kerja kami dalam membangun produk digital.
+* Proyek ini dirancang dengan filosofi **Minimalist–Premium Interface**, dipadukan dengan interaksi berbasis fisika (*physics-based interactions*), animasi presisi tinggi, serta arsitektur kode yang bersih dan maintainable.
+* Website ini tidak hanya berfungsi sebagai media presentasi, tetapi juga sebagai representasi standar kualitas engineering yang kami terapkan pada setiap proyek klien.
+> **Dengan pendekatan **engineering-driven design**, Titik Koma mengedepankan keseimbangan antara estetika, performa, dan kejelasan sistem.**
 ---
 
 ## 🧭 Pages
@@ -104,9 +96,9 @@ resources/
 
 ---
 
-## Firlana Umi
-  👨‍💻 Lead Developer — Titik Koma Digital Studio
-  GitHub: [https://github.com/blackcatin](https://github.com/blackcatin)
+## 👨‍💻Lead Developer — Titik Koma Digital Studio
+### Firlana Umi
+GitHub: [https://github.com/blackcatin](https://github.com/blackcatin)
 
 ---
 
