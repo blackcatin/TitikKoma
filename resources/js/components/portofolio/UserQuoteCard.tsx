@@ -1,8 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Heart } from 'lucide-react';
-
-// Interface untuk data komentar
 export interface FloatingCommentData {
     id: number;
     userName: string;

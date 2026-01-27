@@ -1,4 +1,5 @@
 export const portfolioData = [
+  /* ================= WEB ================= */
   {
     id: 1,
     title: "Lumina E-Commerce",
@@ -21,14 +22,13 @@ export const portfolioData = [
         id: 102,
         userName: "Aris Setiawan",
         avatar: "https://i.pravatar.cc/150?u=aris",
-        text: "Website-nya langsung kelihatan niat.",
-        likes: 15,
+        text: "UX checkout-nya enak banget.",
+        likes: 19,
         position: "bottom-[18%] left-[-4%]",
         delay: 0.7
       }
     ]
   },
-
   {
     id: 2,
     title: "Arkana Company Profile",
@@ -42,14 +42,13 @@ export const portfolioData = [
         id: 201,
         userName: "Bima Pratama",
         avatar: "https://i.pravatar.cc/150?u=bima",
-        text: "Brand image kami jadi lebih profesional.",
+        text: "Brand image kami naik level.",
         likes: 18,
         position: "top-[15%] left-[5%]",
         delay: 0.5
       }
     ]
   },
-
   {
     id: 3,
     title: "EduTrack LMS",
@@ -63,14 +62,13 @@ export const portfolioData = [
         id: 301,
         userName: "Akademi Nusantara",
         avatar: "https://i.pravatar.cc/150?u=edu",
-        text: "Dashboard dosen dan mahasiswa sangat membantu.",
+        text: "Manajemen kelas jadi simpel.",
         likes: 27,
         position: "bottom-[20%] right-[4%]",
         delay: 0.6
       }
     ]
   },
-
   {
     id: 4,
     title: "Nusa Travel Landing",
@@ -84,37 +82,17 @@ export const portfolioData = [
         id: 401,
         userName: "Nusa Travel Team",
         avatar: "https://i.pravatar.cc/150?u=travel",
-        text: "Visualnya bikin orang langsung pengen booking.",
-        likes: 21,
+        text: "Conversion naik signifikan.",
+        likes: 23,
         position: "top-[8%] right-[10%]",
         delay: 0.5
       }
     ]
   },
 
+  /* ================= MOBILE ================= */
   {
     id: 5,
-    title: "KopiRuang Website",
-    category: "web",
-    description: "Website brand UMKM kopi dengan fokus storytelling visual.",
-    mainMockup: "/assets/mockup/kopiruang.png",
-    techStack: ["Astro", "Tailwind"],
-    themeColor: "#7c2d12",
-    userComments: [
-      {
-        id: 501,
-        userName: "KopiRuang",
-        avatar: "https://i.pravatar.cc/150?u=kopi",
-        text: "Ceritanya dapet banget, sesuai brand kami.",
-        likes: 30,
-        position: "bottom-[12%] left-[2%]",
-        delay: 0.6
-      }
-    ]
-  },
-
-  {
-    id: 6,
     title: "Zenith Banking",
     category: "mobile",
     description: "Aplikasi perbankan masa depan dengan keamanan tinggi.",
@@ -123,19 +101,18 @@ export const portfolioData = [
     themeColor: "#d49d00",
     userComments: [
       {
-        id: 601,
+        id: 501,
         userName: "Fintech Partner",
         avatar: "https://i.pravatar.cc/150?u=bank",
-        text: "UI-nya terasa aman dan modern.",
+        text: "Terasa aman & profesional.",
         likes: 19,
         position: "top-[10%] right-[8%]",
         delay: 0.4
       }
     ]
   },
-
   {
-    id: 7,
+    id: 6,
     title: "FitLife App",
     category: "mobile",
     description: "Aplikasi tracking kebugaran dan gaya hidup sehat.",
@@ -144,10 +121,10 @@ export const portfolioData = [
     themeColor: "#16a34a",
     userComments: [
       {
-        id: 701,
+        id: 601,
         userName: "Personal Trainer",
         avatar: "https://i.pravatar.cc/150?u=fit",
-        text: "User gampang paham dari pertama buka.",
+        text: "Client lebih konsisten olahraga.",
         likes: 22,
         position: "bottom-[15%] left-[4%]",
         delay: 0.6
@@ -155,7 +132,49 @@ export const portfolioData = [
     ]
   },
   {
-    id: 11,
+    id: 7,
+    title: "SmartClinic",
+    category: "mobile",
+    description: "Aplikasi manajemen antrian & rekam medis klinik.",
+    mainMockup: "/assets/mockup/clinic.png",
+    techStack: ["Flutter", "Firebase"],
+    themeColor: "#0f766e",
+    userComments: [
+      {
+        id: 701,
+        userName: "Clinic Admin",
+        avatar: "https://i.pravatar.cc/150?u=clinic",
+        text: "Antrian jauh lebih tertib.",
+        likes: 17,
+        position: "top-[14%] left-[6%]",
+        delay: 0.5
+      }
+    ]
+  },
+  {
+    id: 8,
+    title: "FoodieGo",
+    category: "mobile",
+    description: "Aplikasi food delivery UMKM lokal.",
+    mainMockup: "/assets/mockup/foodiego.png",
+    techStack: ["React Native", "Node.js"],
+    themeColor: "#dc2626",
+    userComments: [
+      {
+        id: 801,
+        userName: "UMKM Partner",
+        avatar: "https://i.pravatar.cc/150?u=umkm",
+        text: "Order harian meningkat.",
+        likes: 25,
+        position: "bottom-[10%] right-[5%]",
+        delay: 0.6
+      }
+    ]
+  },
+
+  /* ================= UI/UX ================= */
+  {
+    id: 9,
     title: "E-Commerce Redesign",
     category: "ui/ux",
     description: "Redesign UI untuk meningkatkan conversion rate.",
@@ -164,19 +183,80 @@ export const portfolioData = [
     themeColor: "#f97316",
     userComments: [
       {
-        id: 1101,
+        id: 901,
         userName: "Retail Client",
         avatar: "https://i.pravatar.cc/150?u=retail",
-        text: "Lebih clean dan gampang dipakai.",
+        text: "Lebih clean & efisien.",
         likes: 26,
         position: "top-[14%] left-[6%]",
         delay: 0.5
       }
     ]
   },
-
   {
-    id: 16,
+    id: 10,
+    title: "Banking App UX",
+    category: "ui/ux",
+    description: "Desain UX aplikasi keuangan berbasis riset pengguna.",
+    mainMockup: "/assets/mockup/ui-bank.png",
+    techStack: ["Figma", "UX Research"],
+    themeColor: "#2563eb",
+    userComments: [
+      {
+        id: 1001,
+        userName: "UX Lead",
+        avatar: "https://i.pravatar.cc/150?u=ux",
+        text: "Flow-nya terasa natural.",
+        likes: 20,
+        position: "bottom-[12%] right-[4%]",
+        delay: 0.6
+      }
+    ]
+  },
+  {
+    id: 11,
+    title: "Edu Platform UI",
+    category: "ui/ux",
+    description: "Desain sistem UI platform pembelajaran digital.",
+    mainMockup: "/assets/mockup/ui-edu.png",
+    techStack: ["Figma", "Design Token"],
+    themeColor: "#7c3aed",
+    userComments: [
+      {
+        id: 1101,
+        userName: "Product Owner",
+        avatar: "https://i.pravatar.cc/150?u=po",
+        text: "Lebih ramah untuk user baru.",
+        likes: 18,
+        position: "top-[10%] right-[6%]",
+        delay: 0.5
+      }
+    ]
+  },
+  {
+    id: 12,
+    title: "Dashboard Analytics UI",
+    category: "ui/ux",
+    description: "Desain dashboard data yang fokus pada clarity & insight.",
+    mainMockup: "/assets/mockup/ui-dashboard.png",
+    techStack: ["Figma", "UX Flow"],
+    themeColor: "#0f172a",
+    userComments: [
+      {
+        id: 1201,
+        userName: "Data Manager",
+        avatar: "https://i.pravatar.cc/150?u=dataux",
+        text: "Data jadi mudah dibaca.",
+        likes: 21,
+        position: "bottom-[14%] left-[5%]",
+        delay: 0.6
+      }
+    ]
+  },
+
+  /* ================= DATA & AI ================= */
+  {
+    id: 13,
     title: "Sales Forecast Engine",
     category: "data&AI",
     description: "Model prediksi penjualan berbasis data historis.",
@@ -185,19 +265,18 @@ export const portfolioData = [
     themeColor: "#2563eb",
     userComments: [
       {
-        id: 1601,
+        id: 1301,
         userName: "Business Analyst",
         avatar: "https://i.pravatar.cc/150?u=data",
-        text: "Sangat membantu buat ambil keputusan.",
+        text: "Prediksi-nya sangat akurat.",
         likes: 34,
         position: "top-[10%] right-[5%]",
         delay: 0.5
       }
     ]
   },
-
   {
-    id: 18,
+    id: 14,
     title: "Face Attendance System",
     category: "data&AI",
     description: "Sistem absensi berbasis pengenalan wajah.",
@@ -206,12 +285,52 @@ export const portfolioData = [
     themeColor: "#0ea5e9",
     userComments: [
       {
-        id: 1801,
+        id: 1401,
         userName: "HR Department",
         avatar: "https://i.pravatar.cc/150?u=hr",
-        text: "Absensi jadi jauh lebih praktis.",
+        text: "Absensi jadi otomatis.",
         likes: 29,
         position: "bottom-[18%] left-[3%]",
+        delay: 0.6
+      }
+    ]
+  },
+  {
+    id: 15,
+    title: "Customer Churn AI",
+    category: "data&AI",
+    description: "Model AI untuk prediksi churn pelanggan.",
+    mainMockup: "/assets/mockup/ai-churn.png",
+    techStack: ["Python", "XGBoost"],
+    themeColor: "#7c3aed",
+    userComments: [
+      {
+        id: 1501,
+        userName: "Marketing Lead",
+        avatar: "https://i.pravatar.cc/150?u=ml",
+        text: "Retensi customer meningkat.",
+        likes: 31,
+        position: "top-[12%] left-[6%]",
+        delay: 0.5
+      }
+    ]
+  },
+  {
+    id: 16,
+    title: "Smart Recommendation Engine",
+    category: "data&AI",
+    description: "Sistem rekomendasi produk berbasis perilaku user.",
+    mainMockup: "/assets/mockup/ai-reco.png",
+    techStack: ["Python", "TensorFlow"],
+    themeColor: "#16a34a",
+    userComments: [
+      {
+        id: 1601,
+        userName: "E-Commerce Lead",
+        avatar: "https://i.pravatar.cc/150?u=reco",
+        text: "CTR produk naik drastis.",
+        likes: 36,
+        position: "bottom-[10%] right-[5%]",
         delay: 0.6
       }
     ]

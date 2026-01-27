@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { UserQuoteCard, FloatingCommentData } from './FloatingElement';
-import { Sparkles, ArrowRight, Github, ExternalLink } from 'lucide-react';
+import { Sparkles, ArrowRight, Github, ExternalLink, Database } from 'lucide-react';
 
 interface Project {
     id: number;
@@ -11,7 +11,7 @@ interface Project {
     mainMockup: string;
     techStack: string[];
     themeColor: string;
-    userComments?: FloatingCommentData[]; 
+    userComments?: FloatingCommentData[];
 }
 
 interface CubeProjectProps {
@@ -58,12 +58,12 @@ export default function CubeProject({ project, direction }: CubeProjectProps) {
                 exit="exit"
                 transition={{
                     duration: 0.8,
-                    ease: [0.23, 1, 0.32, 1] 
+                    ease: [0.23, 1, 0.32, 1]
                 }}
                 className="group w-[85vw] h-[75vh] rounded-[4rem] flex overflow-visible relative shadow-2xl border border-white/5 bg-[#110809]"
             >
                 <div className="absolute inset-0 overflow-hidden rounded-[4rem] pointer-events-none">
-                    <div 
+                    <div
                         className="absolute -top-20 -left-20 w-96 h-96 rounded-full blur-[150px] opacity-20"
                         style={{ backgroundColor: project.themeColor }}
                     />
@@ -92,29 +92,25 @@ export default function CubeProject({ project, direction }: CubeProjectProps) {
                             </span>
                         ))}
                     </h2>
-                    
+
                     <p className="text-gray-400 mt-10 text-lg max-w-md italic pl-8 border-l-4 leading-relaxed"
-                       style={{ borderColor: project.themeColor }}>
+                        style={{ borderColor: project.themeColor }}>
                         {project.description}
                     </p>
 
                     <div className="flex items-center gap-6 mt-12">
-                        <motion.button 
+                        <motion.button
                             whileHover={{ scale: 1.05, backgroundColor: project.themeColor, color: '#fff' }}
                             whileTap={{ scale: 0.95 }}
                             className="px-10 py-5 bg-white text-black font-black text-xs uppercase tracking-[0.2em] rounded-2xl flex items-center gap-4 shadow-2xl transition-all"
                         >
                             Explore Case <ArrowRight size={18} />
                         </motion.button>
-                        <div className="flex gap-3">
-                            <button className="p-4 rounded-2xl border border-white/10 text-white/40 hover:text-white hover:border-white/30 transition-all">
-                                <Github size={22} />
-                            </button>
+                            
                         </div>
                     </div>
-                </div>
                 <div className="flex-1 flex items-center justify-center relative p-12 overflow-visible">
-                    
+
                     {project.userComments?.map((comment) => (
                         <UserQuoteCard key={comment.id} comment={comment} />
                     ))}
@@ -127,10 +123,10 @@ export default function CubeProject({ project, direction }: CubeProjectProps) {
                         alt={project.title}
                         className="relative z-10 max-h-[110%] object-contain"
                         style={{ filter: "drop-shadow(0 60px 100px rgba(0,0,0,0.8))" }}
-                        whileHover={{ 
-                            rotateY: -12, 
+                        whileHover={{
+                            rotateY: -12,
                             rotateX: 8,
-                            scale: 1.05 
+                            scale: 1.05
                         }}
                         transition={{ type: "spring", stiffness: 100, damping: 20 }}
                     />
