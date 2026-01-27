@@ -5,9 +5,9 @@ import SplitText from '../components/Animation/SplitText';
 import { usePage } from '@inertiajs/react';
 import myLogo from '../../assets/icons/Logo.png';
 import CardSwap, { Card } from '@/components/Animation/CarsSwap';
-import mockup1 from '../../assets/img/mockup.jpg';
-import mockup2 from '../../assets/img/mockup1.jpg';
-import mockup3 from '../../assets/img/mockup2.jpg';
+import mockup1 from '../../assets/img/card.jpg';
+import mockup2 from '../../assets/img/card1.jpg';
+import mockup3 from '../../assets/img/card2.jpg';
 import { LogoLoop } from '@/components/Animation/LogoLoop';
 import AnimatedContent from '@/components/Animation/AnimatedContent';
 import FallingText from '@/components/Animation/FallingText';
@@ -117,18 +117,26 @@ export default function Home() {
             <main className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 flex flex-col">
                 <AnimatedContent distance={60} direction="vertical" duration={1.2} delay={0.2}>
                     <section className="flex flex-col items-center justify-center text-center min-h-screen pt-24 pb-12">
-                        <div className="max-w-5xl mb-10">
+                        <div className="max-w-7xl mb-10 px-5 flex flex-col items-center">
                             <SplitText
-                                text="We Turn Ideas Into Digital Products"
-                                className="text-6xl md:text-[5rem] font-extrabold italic tracking-tighter leading-none uppercase"
+                                text="We Turn Ideas Into"
+                                className="text-5xl md:text-7xl lg:text-[5.5rem] font-black italic tracking-tighter leading-tight uppercase text-white"
                                 delay={80}
-                                from={{ opacity: 0, y: 100, rotateX: -90 }}
+                                from={{ opacity: 0, y: 40, rotateX: -90 }}
+                                to={{ opacity: 1, y: 0, rotateX: 0 }}
+                                ease="expo.out"
+                                tag="h1"
+                            />
+                            <SplitText
+                                text="Digital Products"
+                                className="text-5xl md:text-7xl lg:text-[5.5rem] font-black italic tracking-tighter leading-tight uppercase text-brand-yellow"
+                                delay={160} 
+                                from={{ opacity: 0, y: 40, rotateX: -90 }}
                                 to={{ opacity: 1, y: 0, rotateX: 0 }}
                                 ease="expo.out"
                                 tag="h1"
                             />
                         </div>
-
                         <p className="text-gray-400 max-w-2xl text-lg md:text-xl leading-relaxed mb-16 px-4">
                             Welcome to <span className="text-brand-yellow font-bold">Titik Koma</span>.
                             Where complex ideas meet structured digital solutions. We bridge the gap between innovation and implementation.

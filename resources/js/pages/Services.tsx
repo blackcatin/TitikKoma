@@ -20,7 +20,7 @@ export default function Services() {
     const [activeFilter, setActiveFilter] = useState('All');
     const [selectedService, setSelectedService] = useState<any | null>(null);
 
-    const filters = ['All', 'Frontend', 'Backend', 'AI & Data', 'UI/UX'];
+    const filters = ['All', 'Frontend', 'Backend','Mobile', 'AI & Data', 'UI/UX'];
 
     const filteredSpecialties = useMemo(() => {
         return technicalSpecialties.filter(item => {

@@ -132,11 +132,11 @@ export default function ServiceModal({ isOpen, onClose, data }: ModalProps) {
                             <div className="absolute -top-10 -right-10 w-28 h-28 bg-white/20 blur-2xl rounded-full pointer-events-none" />
                             
                             <div>
-                                <h4 className="text-[9px] font-black uppercase tracking-[0.3em] text-brand-darkbrown/60 mb-1">Estimated Investment</h4>
+                                <h4 className="text-[9px] font-black uppercase tracking-[0.3em] text-brand-darkbrown/80 mb-1">Estimated Investment</h4>
                                 <div className="text-3xl font-black text-brand-darkbrown tracking-tight mb-2 italic leading-none">
                                     {data.budget}
                                 </div>
-                                <p className="text-[9px] text-brand-darkbrown/40 leading-tight uppercase font-bold tracking-widest">
+                                <p className="text-[9px] text-brand-darkbrown/80 leading-tight uppercase font-bold tracking-widest">
                                     *Investment varies based on project complexity and scope.
                                 </p>
                             </div>
