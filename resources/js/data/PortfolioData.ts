@@ -1,3 +1,12 @@
+import luminaImg from '../../assets/mockup/lumina.png';
+import arkanaImg from '../../assets/mockup/Arkana.png';
+import LMSImg from '../../assets/mockup/LMS.png';
+import nusaImg from '../../assets/mockup/nusa.png';
+import zenithImg from '../../assets/mockup/Zenith.png';
+import FitImg from '../../assets/mockup/Fitlife.png';
+import smartimg from '../../assets/mockup/smart.png';
+import FoodImg from '../../assets/mockup/Food.png';
+
 export const portfolioData = [
   /* ================= WEB ================= */
   {
@@ -5,7 +14,7 @@ export const portfolioData = [
     title: "Lumina E-Commerce",
     category: "web",
     description: "Transformasi retail tradisional menjadi ekosistem digital berperforma tinggi.",
-    mainMockup: "/assets/mockup/lumina.png",
+    mainMockup: luminaImg,
     techStack: ["React", "Next.js", "Tailwind"],
     themeColor: "#ba3c3d",
     userComments: [
@@ -31,30 +40,10 @@ export const portfolioData = [
   },
   {
     id: 2,
-    title: "Arkana Company Profile",
-    category: "web",
-    description: "Website corporate modern untuk meningkatkan kredibilitas perusahaan.",
-    mainMockup: "/assets/mockup/arkana.png",
-    techStack: ["React", "Vite", "Tailwind"],
-    themeColor: "#1f2937",
-    userComments: [
-      {
-        id: 201,
-        userName: "Bima Pratama",
-        avatar: "https://i.pravatar.cc/150?u=bima",
-        text: "Brand image kami naik level.",
-        likes: 18,
-        position: "top-[15%] left-[5%]",
-        delay: 0.5
-      }
-    ]
-  },
-  {
-    id: 3,
     title: "EduTrack LMS",
     category: "web",
     description: "Platform pembelajaran online untuk institusi pendidikan.",
-    mainMockup: "/assets/mockup/edutrack.png",
+    mainMockup: LMSImg,
     techStack: ["Next.js", "Supabase"],
     themeColor: "#6366f1",
     userComments: [
@@ -70,11 +59,11 @@ export const portfolioData = [
     ]
   },
   {
-    id: 4,
+    id: 3,
     title: "Nusa Travel Landing",
     category: "web",
     description: "Landing page campaign untuk peningkatan booking wisata.",
-    mainMockup: "/assets/mockup/nusa.png",
+    mainMockup: nusaImg,
     techStack: ["Next.js", "GSAP"],
     themeColor: "#0ea5e9",
     userComments: [
@@ -89,6 +78,27 @@ export const portfolioData = [
       }
     ]
   },
+  {
+    id: 4,
+    title: "Arkana Company Profile",
+    category: "web",
+    description: "Website corporate modern untuk meningkatkan kredibilitas perusahaan.",
+    mainMockup: arkanaImg,
+    techStack: ["React", "Vite", "Tailwind"],
+    themeColor: "#1f2937",
+    userComments: [
+      {
+        id: 201,
+        userName: "Bima Pratama",
+        avatar: "https://i.pravatar.cc/150?u=bima",
+        text: "Brand image kami naik level.",
+        likes: 18,
+        position: "top-[15%] left-[5%]",
+        delay: 0.5
+      }
+    ]
+  },
+  
 
   /* ================= MOBILE ================= */
   {
@@ -96,7 +106,7 @@ export const portfolioData = [
     title: "Zenith Banking",
     category: "mobile",
     description: "Aplikasi perbankan masa depan dengan keamanan tinggi.",
-    mainMockup: "/assets/mockup/zenith.png",
+    mainMockup: zenithImg,
     techStack: ["React Native", "Firebase"],
     themeColor: "#d49d00",
     userComments: [
@@ -116,7 +126,7 @@ export const portfolioData = [
     title: "FitLife App",
     category: "mobile",
     description: "Aplikasi tracking kebugaran dan gaya hidup sehat.",
-    mainMockup: "/assets/mockup/fitlife.png",
+    mainMockup: FitImg,
     techStack: ["React Native", "Expo"],
     themeColor: "#16a34a",
     userComments: [
@@ -136,7 +146,7 @@ export const portfolioData = [
     title: "SmartClinic",
     category: "mobile",
     description: "Aplikasi manajemen antrian & rekam medis klinik.",
-    mainMockup: "/assets/mockup/clinic.png",
+    mainMockup: smartimg,
     techStack: ["Flutter", "Firebase"],
     themeColor: "#0f766e",
     userComments: [
@@ -156,7 +166,7 @@ export const portfolioData = [
     title: "FoodieGo",
     category: "mobile",
     description: "Aplikasi food delivery UMKM lokal.",
-    mainMockup: "/assets/mockup/foodiego.png",
+    mainMockup: FoodImg,
     techStack: ["React Native", "Node.js"],
     themeColor: "#dc2626",
     userComments: [

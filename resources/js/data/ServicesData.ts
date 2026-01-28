@@ -13,7 +13,7 @@ export interface TechnicalSpecialty {
 }
 
 export const technicalSpecialties: TechnicalSpecialty[] = [
-    // === Frontend ===
+
     {
         icon: "Layout",
         title: "Frontend Developer",
