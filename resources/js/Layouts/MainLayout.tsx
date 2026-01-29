@@ -14,7 +14,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
             { label: 'Services', href: '/services' },
             { label: 'Portfolio', href: '/portfolio' },
             { label: 'About', href: '/about' },
-            { label: 'Methodology', href: '/methodology' },
+            { label: 'FaQ', href: '/FaQ' },
             { label: 'Contact', href: '/contact' },
           ]}
           activeHref={url}

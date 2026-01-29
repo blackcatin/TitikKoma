@@ -36,7 +36,6 @@ export default function PortfolioCube() {
     return (
         <div className="h-screen w-screen bg-[#0d0607] overflow-hidden relative flex items-center justify-center font-sans">
 
-            {/* NAVBAR */}
             <header className="fixed top-0 left-0 w-full z-60 py-6">
                 <PillNav
                     logo={myLogo}
@@ -44,6 +43,7 @@ export default function PortfolioCube() {
                         { label: 'Home', href: '/' },
                         { label: 'Services', href: '/services' },
                         { label: 'Portfolio', href: '/portfolio' },
+                        { label: 'FaQ', href: '/FaQ' },
                         { label: 'About', href: '/about' },
                         { label: 'Contact', href: '/contact' },
                     ]}
@@ -55,7 +55,6 @@ export default function PortfolioCube() {
                 />
             </header>
 
-            {/* SIDEBAR CATEGORY */}
             <aside className="absolute right-8 z-50 flex flex-col gap-6 p-4 rounded-[2.5rem] bg-white/5 backdrop-blur-3xl border border-white/10 shadow-2xl">
                 {categories.map((cat) => (
                     <div key={cat.id} className="relative group flex items-center">
@@ -80,7 +79,6 @@ export default function PortfolioCube() {
                 ))}
             </aside>
 
-            {/* NAVIGASI PROJECT */}
             <div className="absolute left-12 z-50 flex flex-col gap-10 items-center">
                 <button
                     onClick={() => navigate(-1)}
@@ -115,7 +113,6 @@ export default function PortfolioCube() {
                 </div>
             </div>
 
-            {/* CUBE */}
             <div className="w-full h-full perspective-2000 flex items-center justify-center">
                 {filteredProjects.length > 0 && (
                     <CubeProject
@@ -124,8 +121,6 @@ export default function PortfolioCube() {
                     />
                 )}
             </div>
-
-            {/* BACKGROUND TEXT */}
             <div className="absolute inset-0 flex items-center justify-center opacity-[0.02] pointer-events-none">
                 <h1 className="text-[35vw] font-black italic uppercase tracking-tighter">
                     {activeCat}

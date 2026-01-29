@@ -9,7 +9,7 @@ import myLogo from '../../assets/icons/Logo.png';
 import mockup1 from '../../assets/img/card.jpg';
 import mockup2 from '../../assets/img/card1.jpg';
 import mockup3 from '../../assets/img/card2.jpg';
-import RippleGrid from '../components/Animation/RippleGrid';
+import RippleGrid from '@/components/Animation/RippleGrid';
 import SplitText from '../components/Animation/SplitText';
 import PillNav from '../components/PillNav';
 import { testimonialData } from '../data/TestimonialData';
@@ -103,6 +103,7 @@ export default function Home() {
                         { label: 'Home', href: '/' },
                         { label: 'Services', href: '/services' },
                         { label: 'Portfolio', href: '/portfolio' },
+                        { label: 'FaQ', href: '/FaQ' },
                         { label: 'About', href: '/about' },
                         { label: 'Contact', href: '/contact' },
                     ]}
@@ -130,7 +131,7 @@ export default function Home() {
                             <SplitText
                                 text="Digital Products"
                                 className="text-5xl md:text-7xl lg:text-[5.5rem] font-black italic tracking-tighter leading-tight uppercase text-brand-yellow"
-                                delay={160} 
+                                delay={160}
                                 from={{ opacity: 0, y: 40, rotateX: -90 }}
                                 to={{ opacity: 1, y: 0, rotateX: 0 }}
                                 ease="expo.out"
@@ -225,7 +226,7 @@ export default function Home() {
                         <FallingText
                             text="Web-Development AI-Integration MLOps Automation UI/UX-Design Mobile-Apps Branding Data-Analytics IoT-Expert Cloud-System"
                             highlightWords={["Web-Development", "AI-Integration", "MLOps", "Automation"]}
-                            trigger="scroll"
+                            trigger="click" 
                             gravity={1.2}
                             fontSize="1.1rem"
                             mouseConstraintStiffness={0.1}
