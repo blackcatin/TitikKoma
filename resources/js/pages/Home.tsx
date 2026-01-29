@@ -1,18 +1,18 @@
-import React, { useState, useRef } from 'react';
-import PillNav from '../components/PillNav';
-import RippleGrid from '../components/Animation/RippleGrid';
-import SplitText from '../components/Animation/SplitText';
 import { usePage } from '@inertiajs/react';
-import myLogo from '../../assets/icons/Logo.png';
+import React, { useState, useRef } from 'react';
+import AnimatedContent from '@/components/Animation/AnimatedContent';
 import CardSwap, { Card } from '@/components/Animation/CarsSwap';
+import FallingText from '@/components/Animation/FallingText';
+import { LogoLoop } from '@/components/Animation/LogoLoop';
+import Footer from '@/components/Footer';
+import myLogo from '../../assets/icons/Logo.png';
 import mockup1 from '../../assets/img/card.jpg';
 import mockup2 from '../../assets/img/card1.jpg';
 import mockup3 from '../../assets/img/card2.jpg';
-import { LogoLoop } from '@/components/Animation/LogoLoop';
-import AnimatedContent from '@/components/Animation/AnimatedContent';
-import FallingText from '@/components/Animation/FallingText';
+import RippleGrid from '../components/Animation/RippleGrid';
+import SplitText from '../components/Animation/SplitText';
+import PillNav from '../components/PillNav';
 import { testimonialData } from '../data/TestimonialData';
-import Footer from '@/components/Footer';
 
 const FAQItem = ({ question, answer, icon }: { question: string, answer: string, icon?: string }) => {
     const [isOpen, setIsOpen] = useState(false);

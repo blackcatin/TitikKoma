@@ -1,11 +1,11 @@
-import React, { useState, useMemo } from 'react';
+import { usePage } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { Layout, Smartphone, Database, PenTool, ArrowUp, ArrowDown } from 'lucide-react';
-import { portfolioData } from '../data/PortfolioData';
-import CubeProject from '../components/portofolio/CubeProject';
-import PillNav from '../components/PillNav';
+import React, { useState, useMemo } from 'react';
 import myLogo from '../../assets/icons/Logo.png';
-import { usePage } from '@inertiajs/react';
+import PillNav from '../components/PillNav';
+import CubeProject from '../components/portofolio/CubeProject';
+import { portfolioData } from '../data/PortfolioData';
 
 const categories = [
     { id: 'web', label: 'Web', icon: Layout },

@@ -1,9 +1,9 @@
+import { Code2, Palette, Cpu, Cloud, Zap } from 'lucide-react';
 import React from 'react';
 import AnimatedContent from '@/components/Animation/AnimatedContent';
-import { Code2, Palette, Cpu, Cloud, Zap } from 'lucide-react';
 import { Card } from '@/components/services/FloatingCard';
-import RotatingText from '../Animation/RotatingText';
 import Icon from '../../../assets/icons/icon.png';
+import RotatingText from '../Animation/RotatingText';
 
 export default function ServiceHero() {
     return (

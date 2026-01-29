@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
 import { X, CheckCircle2, Zap, Target, Layers, ArrowRight, Sparkles, HelpCircle } from 'lucide-react';
 import * as Icons from "lucide-react"; 
+import React, { useEffect } from 'react';
 interface ServiceData {
     icon: string; 
     title: string;

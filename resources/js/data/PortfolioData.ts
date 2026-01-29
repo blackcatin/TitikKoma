@@ -1,20 +1,20 @@
-import luminaImg from '../../assets/mockup/lumina.png';
 import arkanaImg from '../../assets/mockup/Arkana.png';
-import LMSImg from '../../assets/mockup/LMS.png';
-import nusaImg from '../../assets/mockup/nusa.png';
-import zenithImg from '../../assets/mockup/Zenith.png';
-import FitImg from '../../assets/mockup/Fitlife.png';
-import smartimg from '../../assets/mockup/smart.png';
-import FoodImg from '../../assets/mockup/Food.png';
-import SalesImg from '../../assets/mockup/sales.jpg';
-import faceImg from '../../assets/mockup/face.jpg';
-import custImg from '../../assets/mockup/customer.jpg';
 import recomImg from '../../assets/mockup/recom.jpg';
 import ecomImg from '../../assets/mockup/e-commerce.jpg';
 import bankImg from '../../assets/mockup/banking.jpg';
+import custImg from '../../assets/mockup/customer.jpg';
 import eduImg from '../../assets/mockup/edu.jpg';
 import dashboardImg from '../../assets/mockup/dashboard.jpg';
+import faceImg from '../../assets/mockup/face.jpg';
+import FitImg from '../../assets/mockup/Fitlife.png';
+import FoodImg from '../../assets/mockup/Food.png';
+import LMSImg from '../../assets/mockup/LMS.png';
+import luminaImg from '../../assets/mockup/lumina.png';
+import nusaImg from '../../assets/mockup/nusa.png';
 import redesignImg from '../../assets/mockup/redesign.jpg';
+import SalesImg from '../../assets/mockup/sales.jpg';
+import smartimg from '../../assets/mockup/smart.png';
+import zenithImg from '../../assets/mockup/Zenith.png';
 
 export const portfolioData = [
   /* ================= WEB ================= */

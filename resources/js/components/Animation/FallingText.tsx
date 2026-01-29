@@ -1,5 +1,5 @@
-import { useRef, useState, useEffect } from 'react';
 import Matter from 'matter-js';
+import { useRef, useState, useEffect } from 'react';
 
 interface FallingTextProps {
   text?: string;
@@ -27,6 +27,7 @@ const FallingText: React.FC<FallingTextProps> = ({
   const canvasContainerRef = useRef<HTMLDivElement | null>(null);
   const [effectStarted, setEffectStarted] = useState(false);
 
+  // Perbaikan: Mapping Span Kata
   useEffect(() => {
     if (!textRef.current) return;
     const words = text.split(' ');
@@ -48,12 +49,15 @@ const FallingText: React.FC<FallingTextProps> = ({
     textRef.current.innerHTML = newHTML;
   }, [text, highlightWords]);
 
+  // Perbaikan: Observer Trigger
   useEffect(() => {
     if (trigger === 'auto') {
       setEffectStarted(true);
       return;
     }
-    if (trigger === 'scroll' && containerRef.current) {
+
+    const currentContainer = containerRef.current;
+    if (trigger === 'scroll' && currentContainer) {
       const observer = new IntersectionObserver(
         ([entry]) => {
           if (entry.isIntersecting) {
@@ -63,18 +67,24 @@ const FallingText: React.FC<FallingTextProps> = ({
         },
         { threshold: 0.1 }
       );
-      observer.observe(containerRef.current);
+      observer.observe(currentContainer);
       return () => observer.disconnect();
     }
   }, [trigger]);
 
+  // Perbaikan Utama: Matter.js Engine & Cleanup
   useEffect(() => {
     if (!effectStarted) return;
 
     const { Engine, Render, World, Bodies, Runner, Mouse, MouseConstraint } = Matter;
-    if (!containerRef.current || !canvasContainerRef.current) return;
+    
+    // Perbaikan: Salin ref ke variabel lokal untuk cleanup agar tidak error linting
+    const currentCanvasContainer = canvasContainerRef.current;
+    const currentContainer = containerRef.current;
+    
+    if (!currentContainer || !currentCanvasContainer || !textRef.current) return;
 
-    const containerRect = containerRef.current.getBoundingClientRect();
+    const containerRect = currentContainer.getBoundingClientRect();
     const width = containerRect.width;
     const height = containerRect.height;
     if (width <= 0 || height <= 0) return;
@@ -83,7 +93,7 @@ const FallingText: React.FC<FallingTextProps> = ({
     engine.world.gravity.y = gravity;
 
     const render = Render.create({
-      element: canvasContainerRef.current,
+      element: currentCanvasContainer,
       engine,
       options: { width, height, background: backgroundColor, wireframes }
     });
@@ -94,7 +104,7 @@ const FallingText: React.FC<FallingTextProps> = ({
     const rightWall = Bodies.rectangle(width + 25, height / 2, 50, height, boundaryOptions);
     const ceiling = Bodies.rectangle(width / 2, -25, width, 50, boundaryOptions);
 
-    const wordSpans = textRef.current?.querySelectorAll('span') || [];
+    const wordSpans = textRef.current.querySelectorAll('span');
     const wordBodies = Array.from(wordSpans).map(elem => {
       const rect = elem.getBoundingClientRect();
       const x = rect.left - containerRect.left + rect.width / 2;
@@ -114,7 +124,7 @@ const FallingText: React.FC<FallingTextProps> = ({
       return { elem, body };
     });
 
-    const mouse = Mouse.create(containerRef.current);
+    const mouse = Mouse.create(currentContainer);
     const mouseConstraint = MouseConstraint.create(engine, {
       mouse,
       constraint: {
@@ -129,26 +139,29 @@ const FallingText: React.FC<FallingTextProps> = ({
     Runner.run(runner, engine);
     Render.run(render);
 
+    let animationId: number;
     const updateLoop = () => {
       wordBodies.forEach(({ body, elem }) => {
         const { x, y } = body.position;
-        (elem as HTMLElement).style.position = 'absolute';
-        (elem as HTMLElement).style.left = `${x}px`;
-        (elem as HTMLElement).style.top = `${y}px`;
-        (elem as HTMLElement).style.transform = `translate(-50%, -50%) rotate(${body.angle}rad)`;
+        elem.style.position = 'absolute';
+        elem.style.left = `${x}px`;
+        elem.style.top = `${y}px`;
+        elem.style.transform = `translate(-50%, -50%) rotate(${body.angle}rad)`;
       });
-      requestAnimationFrame(updateLoop);
+      animationId = requestAnimationFrame(updateLoop);
     };
     updateLoop();
 
+    // Cleanup Function yang aman
     return () => {
       Render.stop(render);
       Runner.stop(runner);
-      if (render.canvas && canvasContainerRef.current) {
-        canvasContainerRef.current.removeChild(render.canvas);
+      if (render.canvas && currentCanvasContainer) {
+        currentCanvasContainer.removeChild(render.canvas);
       }
       World.clear(engine.world, false);
       Engine.clear(engine);
+      cancelAnimationFrame(animationId);
     };
   }, [effectStarted, gravity, wireframes, backgroundColor, mouseConstraintStiffness]);
 
@@ -167,7 +180,7 @@ const FallingText: React.FC<FallingTextProps> = ({
     >
       <div
         ref={textRef}
-        className="inline-block w-full text-center"
+        className="inline-block w-full text-center relative"
         style={{ fontSize, lineHeight: 1.8 }}
       />
       <div className="absolute top-0 left-0 z-0 pointer-events-none" ref={canvasContainerRef} />

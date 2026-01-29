@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
 import { Link } from '@inertiajs/react';
 import { gsap } from 'gsap';
+import React, { useEffect, useRef, useState } from 'react';
 
 export type PillNavItem = {
     label: string;

@@ -1,5 +1,5 @@
-import PillNav from '../components/PillNav';
 import { usePage } from '@inertiajs/react';
+import PillNav from '../components/PillNav';
 import logo from '/public/favicon.ico';
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {

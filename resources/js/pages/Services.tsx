@@ -1,18 +1,18 @@
-import React, { useState, useMemo } from 'react';
 import { usePage } from '@inertiajs/react';
 import { ArrowRight, Search } from 'lucide-react';
+import React, { useState, useMemo } from 'react';
 
-import PillNav from '@/components/PillNav';
-import Particles from '@/components/Animation/Particles';
 import AnimatedContent from '@/components/Animation/AnimatedContent';
-import ServiceHero from '@/components/services/Hero';
-import ServiceModal from '@/pages/Modal';
-import SpotlightCard from '@/components/services/SpotlightCard';
+import Particles from '@/components/Animation/Particles';
 import Footer from '@/components/Footer';
+import PillNav from '@/components/PillNav';
+import ServiceHero from '@/components/services/Hero';
+import SpotlightCard from '@/components/services/SpotlightCard';
+import ServiceModal from '@/pages/Modal';
 
-import { technicalSpecialties } from '../data/ServicesData';
 import logo from '../../assets/icons/Logo.png';
 import karakter from '../../assets/img/cartoo.png';
+import { technicalSpecialties } from '../data/ServicesData';
 
 export default function Services() {
     const { url } = usePage();

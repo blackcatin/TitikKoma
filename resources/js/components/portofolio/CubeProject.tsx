@@ -1,7 +1,8 @@
-import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { UserQuoteCard, FloatingCommentData } from './FloatingElement';
 import { Sparkles, ArrowRight, Github, ExternalLink, Database } from 'lucide-react';
+import React from 'react';
+import type { FloatingCommentData } from './FloatingElement';
+import { UserQuoteCard } from './FloatingElement';
 
 interface Project {
     id: number;

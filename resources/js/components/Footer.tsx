@@ -1,6 +1,6 @@
-import React from 'react';
 import { Link } from '@inertiajs/react';
 import { Instagram, Linkedin, Github, Mail, Phone } from 'lucide-react';
+import React from 'react';
 import myLogo from '../../assets/icons/icon.png';
 
 export default function Footer() {

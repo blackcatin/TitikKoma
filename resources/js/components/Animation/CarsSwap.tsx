@@ -1,16 +1,17 @@
+import gsap from 'gsap';
+import type {
+  ReactElement,
+  ReactNode,
+  RefObject} from 'react';
 import React, {
   Children,
   cloneElement,
   forwardRef,
   isValidElement,
-  ReactElement,
-  ReactNode,
-  RefObject,
   useEffect,
   useMemo,
   useRef
 } from 'react';
-import gsap from 'gsap';
 
 export interface CardSwapProps {
   width?: number | string;

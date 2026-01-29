@@ -1,289 +1,191 @@
-import { useRef, useEffect } from 'react';
-import { Renderer, Program, Triangle, Mesh } from 'ogl';
+import Matter from 'matter-js';
+import { useRef, useState, useEffect } from 'react';
 
-type Props = {
-  enableRainbow?: boolean;
-  gridColor?: string;
-  rippleIntensity?: number;
-  gridSize?: number;
-  gridThickness?: number;
-  fadeDistance?: number;
-  vignetteStrength?: number;
-  glowIntensity?: number;
-  opacity?: number;
-  gridRotation?: number;
-  mouseInteraction?: boolean;
-  mouseInteractionRadius?: number;
-};
-
-const RippleGrid: React.FC<Props> = ({
-  enableRainbow = false,
-  gridColor = '#ffffff',
-  rippleIntensity = 0.05,
-  gridSize = 10.0,
-  gridThickness = 15.0,
-  fadeDistance = 1.5,
-  vignetteStrength = 2.0,
-  glowIntensity = 0.1,
-  opacity = 1.0,
-  gridRotation = 0,
-  mouseInteraction = true,
-  mouseInteractionRadius = 1
-}) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const mousePositionRef = useRef({ x: 0.5, y: 0.5 });
-  const targetMouseRef = useRef({ x: 0.5, y: 0.5 });
-  const mouseInfluenceRef = useRef(0);
-  const uniformsRef = useRef<any>(null);
-
-  useEffect(() => {
-    if (!containerRef.current) return;
-
-    const hexToRgb = (hex: string): [number, number, number] => {
-      const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-      return result
-        ? [parseInt(result[1], 16) / 255, parseInt(result[2], 16) / 255, parseInt(result[3], 16) / 255]
-        : [1, 1, 1];
-    };
-
-    const renderer = new Renderer({
-      dpr: Math.min(window.devicePixelRatio, 2),
-      alpha: true
-    });
-    const gl = renderer.gl;
-    gl.enable(gl.BLEND);
-    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-    gl.canvas.style.width = '100%';
-    gl.canvas.style.height = '100%';
-    containerRef.current.appendChild(gl.canvas);
-
-    const vert = `
-attribute vec2 position;
-varying vec2 vUv;
-void main() {
-    vUv = position * 0.5 + 0.5;
-    gl_Position = vec4(position, 0.0, 1.0);
-}`;
-
-    const frag = `precision highp float;
-uniform float iTime;
-uniform vec2 iResolution;
-uniform bool enableRainbow;
-uniform vec3 gridColor;
-uniform float rippleIntensity;
-uniform float gridSize;
-uniform float gridThickness;
-uniform float fadeDistance;
-uniform float vignetteStrength;
-uniform float glowIntensity;
-uniform float opacity;
-uniform float gridRotation;
-uniform bool mouseInteraction;
-uniform vec2 mousePosition;
-uniform float mouseInfluence;
-uniform float mouseInteractionRadius;
-varying vec2 vUv;
-
-float pi = 3.141592;
-
-mat2 rotate(float angle) {
-    float s = sin(angle);
-    float c = cos(angle);
-    return mat2(c, -s, s, c);
+interface FallingTextProps {
+  text?: string;
+  highlightWords?: string[];
+  trigger?: 'auto' | 'scroll' | 'click' | 'hover';
+  backgroundColor?: string;
+  wireframes?: boolean;
+  gravity?: number;
+  mouseConstraintStiffness?: number;
+  fontSize?: string;
 }
 
-void main() {
-    vec2 uv = vUv * 2.0 - 1.0;
-    uv.x *= iResolution.x / iResolution.y;
+const FallingText: React.FC<FallingTextProps> = ({
+  text = '',
+  highlightWords = [],
+  trigger = 'auto',
+  backgroundColor = 'transparent',
+  wireframes = false,
+  gravity = 1,
+  mouseConstraintStiffness = 0.2,
+  fontSize = '1rem'
+}) => {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const textRef = useRef<HTMLDivElement | null>(null);
+  const canvasContainerRef = useRef<HTMLDivElement | null>(null);
+  const [effectStarted, setEffectStarted] = useState(false);
 
-    if (gridRotation != 0.0) {
-        uv = rotate(gridRotation * pi / 180.0) * uv;
-    }
-
-    float dist = length(uv);
-    float func = sin(pi * (iTime - dist));
-    vec2 rippleUv = uv + uv * func * rippleIntensity;
-
-    if (mouseInteraction && mouseInfluence > 0.0) {
-        vec2 mouseUv = (mousePosition * 2.0 - 1.0);
-        mouseUv.x *= iResolution.x / iResolution.y;
-        float mouseDist = length(uv - mouseUv);
-        
-        float influence = mouseInfluence * exp(-mouseDist * mouseDist / (mouseInteractionRadius * mouseInteractionRadius));
-        
-        float mouseWave = sin(pi * (iTime * 2.0 - mouseDist * 3.0)) * influence;
-        rippleUv += normalize(uv - mouseUv) * mouseWave * rippleIntensity * 0.3;
-    }
-
-    vec2 a = sin(gridSize * 0.5 * pi * rippleUv - pi / 2.0);
-    vec2 b = abs(a);
-
-    float aaWidth = 0.5;
-    vec2 smoothB = vec2(
-        smoothstep(0.0, aaWidth, b.x),
-        smoothstep(0.0, aaWidth, b.y)
-    );
-
-    vec3 color = vec3(0.0);
-    color += exp(-gridThickness * smoothB.x * (0.8 + 0.5 * sin(pi * iTime)));
-    color += exp(-gridThickness * smoothB.y);
-    color += 0.5 * exp(-(gridThickness / 4.0) * sin(smoothB.x));
-    color += 0.5 * exp(-(gridThickness / 3.0) * smoothB.y);
-
-    if (glowIntensity > 0.0) {
-        color += glowIntensity * exp(-gridThickness * 0.5 * smoothB.x);
-        color += glowIntensity * exp(-gridThickness * 0.5 * smoothB.y);
-    }
-
-    float ddd = exp(-2.0 * clamp(pow(dist, fadeDistance), 0.0, 1.0));
-    
-    vec2 vignetteCoords = vUv - 0.5;
-    float vignetteDistance = length(vignetteCoords);
-    float vignette = 1.0 - pow(vignetteDistance * 2.0, vignetteStrength);
-    vignette = clamp(vignette, 0.0, 1.0);
-    
-    vec3 t;
-    if (enableRainbow) {
-        t = vec3(
-            uv.x * 0.5 + 0.5 * sin(iTime),
-            uv.y * 0.5 + 0.5 * cos(iTime),
-            pow(cos(iTime), 4.0)
-        ) + 0.5;
-    } else {
-        t = gridColor;
-    }
-
-    float finalFade = ddd * vignette;
-    float alpha = length(color) * finalFade * opacity;
-    gl_FragColor = vec4(color * t * finalFade * opacity, alpha);
-}`;
-
-    const uniforms = {
-      iTime: { value: 0 },
-      iResolution: { value: [1, 1] },
-      enableRainbow: { value: enableRainbow },
-      gridColor: { value: hexToRgb(gridColor) },
-      rippleIntensity: { value: rippleIntensity },
-      gridSize: { value: gridSize },
-      gridThickness: { value: gridThickness },
-      fadeDistance: { value: fadeDistance },
-      vignetteStrength: { value: vignetteStrength },
-      glowIntensity: { value: glowIntensity },
-      opacity: { value: opacity },
-      gridRotation: { value: gridRotation },
-      mouseInteraction: { value: mouseInteraction },
-      mousePosition: { value: [0.5, 0.5] },
-      mouseInfluence: { value: 0 },
-      mouseInteractionRadius: { value: mouseInteractionRadius }
-    };
-
-    uniformsRef.current = uniforms;
-
-    const geometry = new Triangle(gl);
-    const program = new Program(gl, { vertex: vert, fragment: frag, uniforms });
-    const mesh = new Mesh(gl, { geometry, program });
-
-    const resize = () => {
-      const { clientWidth: w, clientHeight: h } = containerRef.current!;
-      renderer.setSize(w, h);
-      uniforms.iResolution.value = [w, h];
-    };
-
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!mouseInteraction || !containerRef.current) return;
-      const rect = containerRef.current.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width;
-      const y = 1.0 - (e.clientY - rect.top) / rect.height;
-      targetMouseRef.current = { x, y };
-    };
-
-    const handleMouseEnter = () => {
-      if (!mouseInteraction) return;
-      mouseInfluenceRef.current = 1.0;
-    };
-
-    const handleMouseLeave = () => {
-      if (!mouseInteraction) return;
-      mouseInfluenceRef.current = 0.0;
-    };
-
-    window.addEventListener('resize', resize);
-    if (mouseInteraction) {
-      containerRef.current.addEventListener('mousemove', handleMouseMove);
-      containerRef.current.addEventListener('mouseenter', handleMouseEnter);
-      containerRef.current.addEventListener('mouseleave', handleMouseLeave);
-    }
-    resize();
-
-    const render = (t: number) => {
-      uniforms.iTime.value = t * 0.001;
-
-      const lerpFactor = 0.1;
-      mousePositionRef.current.x += (targetMouseRef.current.x - mousePositionRef.current.x) * lerpFactor;
-      mousePositionRef.current.y += (targetMouseRef.current.y - mousePositionRef.current.y) * lerpFactor;
-
-      const currentInfluence = uniforms.mouseInfluence.value;
-      const targetInfluence = mouseInfluenceRef.current;
-      uniforms.mouseInfluence.value += (targetInfluence - currentInfluence) * 0.05;
-
-      uniforms.mousePosition.value = [mousePositionRef.current.x, mousePositionRef.current.y];
-
-      renderer.render({ scene: mesh });
-      requestAnimationFrame(render);
-    };
-
-    requestAnimationFrame(render);
-
-    return () => {
-      window.removeEventListener('resize', resize);
-      if (mouseInteraction && containerRef.current) {
-        containerRef.current.removeEventListener('mousemove', handleMouseMove);
-        containerRef.current.removeEventListener('mouseenter', handleMouseEnter);
-        containerRef.current.removeEventListener('mouseleave', handleMouseLeave);
-      }
-      renderer.gl.getExtension('WEBGL_lose_context')?.loseContext();
-      containerRef.current?.removeChild(gl.canvas);
-    };
-  }, []);
-
+  // Perbaikan: Mapping Span Kata
   useEffect(() => {
-    if (!uniformsRef.current) return;
+    if (!textRef.current) return;
+    const words = text.split(' ');
 
-    const hexToRgb = (hex: string): [number, number, number] => {
-      const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-      return result
-        ? [parseInt(result[1], 16) / 255, parseInt(result[2], 16) / 255, parseInt(result[3], 16) / 255]
-        : [1, 1, 1];
+    const newHTML = words
+      .map(word => {
+        const isHighlighted = highlightWords.some(hw => word.toLowerCase().includes(hw.toLowerCase()));
+        return `<span
+          class="inline-block px-5 py-2 m-1.5 rounded-full border border-white/10 select-none cursor-grab active:cursor-grabbing transition-colors
+          ${isHighlighted 
+            ? 'bg-brand-yellow text-brand-darkbrown font-black uppercase italic shadow-[0_0_15px_rgba(212,157,0,0.3)]' 
+            : 'bg-white/10 text-gray-300'}"
+        >
+          ${word}
+        </span>`;
+      })
+      .join(' ');
+
+    textRef.current.innerHTML = newHTML;
+  }, [text, highlightWords]);
+
+  // Perbaikan: Observer Trigger
+  useEffect(() => {
+    if (trigger === 'auto') {
+      setEffectStarted(true);
+      return;
+    }
+
+    const currentContainer = containerRef.current;
+    if (trigger === 'scroll' && currentContainer) {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setEffectStarted(true);
+            observer.disconnect();
+          }
+        },
+        { threshold: 0.1 }
+      );
+      observer.observe(currentContainer);
+      return () => observer.disconnect();
+    }
+  }, [trigger]);
+
+  // Perbaikan Utama: Matter.js Engine & Cleanup
+  useEffect(() => {
+    if (!effectStarted) return;
+
+    const { Engine, Render, World, Bodies, Runner, Mouse, MouseConstraint } = Matter;
+    
+    // Perbaikan: Salin ref ke variabel lokal untuk cleanup agar tidak error linting
+    const currentCanvasContainer = canvasContainerRef.current;
+    const currentContainer = containerRef.current;
+    
+    if (!currentContainer || !currentCanvasContainer || !textRef.current) return;
+
+    const containerRect = currentContainer.getBoundingClientRect();
+    const width = containerRect.width;
+    const height = containerRect.height;
+    if (width <= 0 || height <= 0) return;
+
+    const engine = Engine.create();
+    engine.world.gravity.y = gravity;
+
+    const render = Render.create({
+      element: currentCanvasContainer,
+      engine,
+      options: { width, height, background: backgroundColor, wireframes }
+    });
+
+    const boundaryOptions = { isStatic: true, render: { fillStyle: 'transparent' } };
+    const floor = Bodies.rectangle(width / 2, height + 25, width, 50, boundaryOptions);
+    const leftWall = Bodies.rectangle(-25, height / 2, 50, height, boundaryOptions);
+    const rightWall = Bodies.rectangle(width + 25, height / 2, 50, height, boundaryOptions);
+    const ceiling = Bodies.rectangle(width / 2, -25, width, 50, boundaryOptions);
+
+    const wordSpans = textRef.current.querySelectorAll('span');
+    const wordBodies = Array.from(wordSpans).map(elem => {
+      const rect = elem.getBoundingClientRect();
+      const x = rect.left - containerRect.left + rect.width / 2;
+      const y = rect.top - containerRect.top + rect.height / 2;
+
+      const body = Bodies.rectangle(x, y, rect.width, rect.height, {
+        render: { fillStyle: 'transparent' },
+        restitution: 0.6,
+        frictionAir: 0.02,
+        friction: 0.1,
+        chamfer: { radius: rect.height / 2 } 
+      });
+
+      Matter.Body.setVelocity(body, { x: (Math.random() - 0.5) * 5, y: 0 });
+      Matter.Body.setAngularVelocity(body, (Math.random() - 0.5) * 0.05);
+
+      return { elem, body };
+    });
+
+    const mouse = Mouse.create(currentContainer);
+    const mouseConstraint = MouseConstraint.create(engine, {
+      mouse,
+      constraint: {
+        stiffness: mouseConstraintStiffness,
+        render: { visible: false }
+      }
+    });
+
+    World.add(engine.world, [floor, leftWall, rightWall, ceiling, mouseConstraint, ...wordBodies.map(wb => wb.body)]);
+
+    const runner = Runner.create();
+    Runner.run(runner, engine);
+    Render.run(render);
+
+    let animationId: number;
+    const updateLoop = () => {
+      wordBodies.forEach(({ body, elem }) => {
+        const { x, y } = body.position;
+        elem.style.position = 'absolute';
+        elem.style.left = `${x}px`;
+        elem.style.top = `${y}px`;
+        elem.style.transform = `translate(-50%, -50%) rotate(${body.angle}rad)`;
+      });
+      animationId = requestAnimationFrame(updateLoop);
     };
+    updateLoop();
 
-    uniformsRef.current.enableRainbow.value = enableRainbow;
-    uniformsRef.current.gridColor.value = hexToRgb(gridColor);
-    uniformsRef.current.rippleIntensity.value = rippleIntensity;
-    uniformsRef.current.gridSize.value = gridSize;
-    uniformsRef.current.gridThickness.value = gridThickness;
-    uniformsRef.current.fadeDistance.value = fadeDistance;
-    uniformsRef.current.vignetteStrength.value = vignetteStrength;
-    uniformsRef.current.glowIntensity.value = glowIntensity;
-    uniformsRef.current.opacity.value = opacity;
-    uniformsRef.current.gridRotation.value = gridRotation;
-    uniformsRef.current.mouseInteraction.value = mouseInteraction;
-    uniformsRef.current.mouseInteractionRadius.value = mouseInteractionRadius;
-  }, [
-    enableRainbow,
-    gridColor,
-    rippleIntensity,
-    gridSize,
-    gridThickness,
-    fadeDistance,
-    vignetteStrength,
-    glowIntensity,
-    opacity,
-    gridRotation,
-    mouseInteraction,
-    mouseInteractionRadius
-  ]);
+    // Cleanup Function yang aman
+    return () => {
+      Render.stop(render);
+      Runner.stop(runner);
+      if (render.canvas && currentCanvasContainer) {
+        currentCanvasContainer.removeChild(render.canvas);
+      }
+      World.clear(engine.world, false);
+      Engine.clear(engine);
+      cancelAnimationFrame(animationId);
+    };
+  }, [effectStarted, gravity, wireframes, backgroundColor, mouseConstraintStiffness]);
 
-  return <div ref={containerRef} className="w-full h-full relative overflow-hidden [&_canvas]:block" />;
+  const handleTrigger = () => {
+    if (!effectStarted && (trigger === 'click' || trigger === 'hover')) {
+      setEffectStarted(true);
+    }
+  };
+
+  return (
+    <div
+      ref={containerRef}
+      className="relative z-1 w-full h-full cursor-pointer overflow-hidden"
+      onClick={trigger === 'click' ? handleTrigger : undefined}
+      onMouseEnter={trigger === 'hover' ? handleTrigger : undefined}
+    >
+      <div
+        ref={textRef}
+        className="inline-block w-full text-center relative"
+        style={{ fontSize, lineHeight: 1.8 }}
+      />
+      <div className="absolute top-0 left-0 z-0 pointer-events-none" ref={canvasContainerRef} />
+    </div>
+  );
 };
 
-export default RippleGrid;
+export default FallingText;
