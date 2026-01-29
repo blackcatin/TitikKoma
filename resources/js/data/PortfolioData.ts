@@ -6,6 +6,15 @@ import zenithImg from '../../assets/mockup/Zenith.png';
 import FitImg from '../../assets/mockup/Fitlife.png';
 import smartimg from '../../assets/mockup/smart.png';
 import FoodImg from '../../assets/mockup/Food.png';
+import SalesImg from '../../assets/mockup/sales.jpg';
+import faceImg from '../../assets/mockup/face.jpg';
+import custImg from '../../assets/mockup/customer.jpg';
+import recomImg from '../../assets/mockup/recom.jpg';
+import ecomImg from '../../assets/mockup/e-commerce.jpg';
+import bankImg from '../../assets/mockup/banking.jpg';
+import eduImg from '../../assets/mockup/edu.jpg';
+import dashboardImg from '../../assets/mockup/dashboard.jpg';
+import redesignImg from '../../assets/mockup/redesign.jpg';
 
 export const portfolioData = [
   /* ================= WEB ================= */
@@ -143,26 +152,6 @@ export const portfolioData = [
   },
   {
     id: 7,
-    title: "SmartClinic",
-    category: "mobile",
-    description: "Aplikasi manajemen antrian & rekam medis klinik.",
-    mainMockup: smartimg,
-    techStack: ["Flutter", "Firebase"],
-    themeColor: "#0f766e",
-    userComments: [
-      {
-        id: 701,
-        userName: "Clinic Admin",
-        avatar: "https://i.pravatar.cc/150?u=clinic",
-        text: "Antrian jauh lebih tertib.",
-        likes: 17,
-        position: "top-[14%] left-[6%]",
-        delay: 0.5
-      }
-    ]
-  },
-  {
-    id: 8,
     title: "FoodieGo",
     category: "mobile",
     description: "Aplikasi food delivery UMKM lokal.",
@@ -181,6 +170,27 @@ export const portfolioData = [
       }
     ]
   },
+  {
+    id: 8,
+    title: "SmartClinic",
+    category: "mobile",
+    description: "Aplikasi manajemen antrian & rekam medis klinik.",
+    mainMockup: smartimg,
+    techStack: ["Flutter", "Firebase"],
+    themeColor: "#0f766e",
+    userComments: [
+      {
+        id: 701,
+        userName: "Clinic Admin",
+        avatar: "https://i.pravatar.cc/150?u=clinic",
+        text: "Antrian jauh lebih tertib.",
+        likes: 17,
+        position: "top-[14%] left-[6%]",
+        delay: 0.5
+      }
+    ]
+  },
+  
 
   /* ================= UI/UX ================= */
   {
@@ -188,7 +198,7 @@ export const portfolioData = [
     title: "E-Commerce Redesign",
     category: "ui/ux",
     description: "Redesign UI untuk meningkatkan conversion rate.",
-    mainMockup: "/assets/mockup/ui-ecom.png",
+    mainMockup: redesignImg,
     techStack: ["Figma", "Design System"],
     themeColor: "#f97316",
     userComments: [
@@ -208,7 +218,7 @@ export const portfolioData = [
     title: "Banking App UX",
     category: "ui/ux",
     description: "Desain UX aplikasi keuangan berbasis riset pengguna.",
-    mainMockup: "/assets/mockup/ui-bank.png",
+    mainMockup: bankImg,
     techStack: ["Figma", "UX Research"],
     themeColor: "#2563eb",
     userComments: [
@@ -228,7 +238,7 @@ export const portfolioData = [
     title: "Edu Platform UI",
     category: "ui/ux",
     description: "Desain sistem UI platform pembelajaran digital.",
-    mainMockup: "/assets/mockup/ui-edu.png",
+    mainMockup: eduImg,
     techStack: ["Figma", "Design Token"],
     themeColor: "#7c3aed",
     userComments: [
@@ -248,7 +258,7 @@ export const portfolioData = [
     title: "Dashboard Analytics UI",
     category: "ui/ux",
     description: "Desain dashboard data yang fokus pada clarity & insight.",
-    mainMockup: "/assets/mockup/ui-dashboard.png",
+    mainMockup: dashboardImg,
     techStack: ["Figma", "UX Flow"],
     themeColor: "#0f172a",
     userComments: [
@@ -270,7 +280,7 @@ export const portfolioData = [
     title: "Sales Forecast Engine",
     category: "data&AI",
     description: "Model prediksi penjualan berbasis data historis.",
-    mainMockup: "/assets/mockup/ai-sales.png",
+    mainMockup: SalesImg,
     techStack: ["Python", "Scikit-Learn"],
     themeColor: "#2563eb",
     userComments: [
@@ -287,30 +297,10 @@ export const portfolioData = [
   },
   {
     id: 14,
-    title: "Face Attendance System",
-    category: "data&AI",
-    description: "Sistem absensi berbasis pengenalan wajah.",
-    mainMockup: "/assets/mockup/ai-face.png",
-    techStack: ["OpenCV", "TensorFlow"],
-    themeColor: "#0ea5e9",
-    userComments: [
-      {
-        id: 1401,
-        userName: "HR Department",
-        avatar: "https://i.pravatar.cc/150?u=hr",
-        text: "Absensi jadi otomatis.",
-        likes: 29,
-        position: "bottom-[18%] left-[3%]",
-        delay: 0.6
-      }
-    ]
-  },
-  {
-    id: 15,
     title: "Customer Churn AI",
     category: "data&AI",
     description: "Model AI untuk prediksi churn pelanggan.",
-    mainMockup: "/assets/mockup/ai-churn.png",
+    mainMockup: custImg,
     techStack: ["Python", "XGBoost"],
     themeColor: "#7c3aed",
     userComments: [
@@ -325,12 +315,12 @@ export const portfolioData = [
       }
     ]
   },
-  {
-    id: 16,
-    title: "Smart Recommendation Engine",
+   {
+    id: 15,
+    title: "Smart Recom Engine",
     category: "data&AI",
     description: "Sistem rekomendasi produk berbasis perilaku user.",
-    mainMockup: "/assets/mockup/ai-reco.png",
+    mainMockup: recomImg,
     techStack: ["Python", "TensorFlow"],
     themeColor: "#16a34a",
     userComments: [
@@ -344,5 +334,26 @@ export const portfolioData = [
         delay: 0.6
       }
     ]
-  }
+  },
+   {
+    id: 16,
+    title: "Face Attendance System",
+    category: "data&AI",
+    description: "Sistem absensi berbasis pengenalan wajah.",
+    mainMockup: faceImg,
+    techStack: ["OpenCV", "TensorFlow"],
+    themeColor: "#0ea5e9",
+    userComments: [
+      {
+        id: 1401,
+        userName: "HR Department",
+        avatar: "https://i.pravatar.cc/150?u=hr",
+        text: "Absensi jadi otomatis.",
+        likes: 29,
+        position: "bottom-[18%] left-[3%]",
+        delay: 0.6
+      }
+    ]
+  },
+ 
 ];
