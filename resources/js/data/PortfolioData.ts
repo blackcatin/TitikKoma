@@ -20,7 +20,7 @@ export const portfolioData = [
   /* ================= WEB ================= */
   {
     id: 1,
-    title: "Lumina E-Commerce",
+    title: "Lumina E-Com",
     category: "web",
     description: "Transformasi retail tradisional menjadi ekosistem digital berperforma tinggi.",
     mainMockup: luminaImg,
@@ -195,7 +195,7 @@ export const portfolioData = [
   /* ================= UI/UX ================= */
   {
     id: 9,
-    title: "E-Commerce Redesign",
+    title: "Website Redesign",
     category: "ui/ux",
     description: "Redesign UI untuk meningkatkan conversion rate.",
     mainMockup: redesignImg,
@@ -337,7 +337,7 @@ export const portfolioData = [
   },
    {
     id: 16,
-    title: "Face Attendance System",
+    title: "Face Attend System",
     category: "data&AI",
     description: "Sistem absensi berbasis pengenalan wajah.",
     mainMockup: faceImg,

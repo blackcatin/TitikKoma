@@ -43,8 +43,8 @@ export default function PortfolioCube() {
                         { label: 'Home', href: '/' },
                         { label: 'Services', href: '/services' },
                         { label: 'Portfolio', href: '/portfolio' },
+                         { label: 'About', href: '/about' },
                         { label: 'FaQ', href: '/FaQ' },
-                        { label: 'About', href: '/about' },
                         { label: 'Contact', href: '/contact' },
                     ]}
                     activeHref={url}

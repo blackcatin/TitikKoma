@@ -40,7 +40,7 @@ export default function Services() {
             </div>
 
             <header className="fixed top-0 left-0 w-full z-50 py-6">
-                <PillNav logo={logo} items={[{ label: 'Home', href: '/' }, { label: 'Services', href: '/services' }, { label: 'Portfolio', href: '/portfolio' }, { label: 'FaQ', href: '/FaQ' }, { label: 'About', href: '/about' }, { label: 'Contact', href: '/contact' }]} activeHref={url} baseColor="#ba3c3d" />
+                <PillNav logo={logo} items={[{ label: 'Home', href: '/' }, { label: 'Services', href: '/services' }, { label: 'Portfolio', href: '/portfolio' }, { label: 'About', href: '/about' }, { label: 'FaQ', href: '/FaQ' }, { label: 'Contact', href: '/contact' }]} activeHref={url} baseColor="#ba3c3d" />
             </header>
             <main className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 pt-6 pb-8">
                 <ServiceHero />
