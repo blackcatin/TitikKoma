@@ -7,7 +7,7 @@ import { TeamCard } from '../components/About/TeamCard';
 import TextType from '../components/About/TextType';
 import PillNav from '../components/PillNav';
 import myLogo from '../../assets/icons/Logo.png';
-import { ChevronRight, Target, Rocket, Users } from 'lucide-react';
+import { ChevronRight, Target, Rocket, Users, Code2, Palette } from 'lucide-react';
 import CountUp from '../components/About/CountUp';
 import founder from "../../assets/img/founder.jpg";
 import cofounder from "../../assets/img/co-founder.jpg";
@@ -96,9 +96,7 @@ export default function About() {
         ref={scrollContainerRef}
         className="flex h-full w-full overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-smooth hide-scrollbar"
       >
-
-        {/* SLIDE 1: IDENTITY */}
-        <section className="min-w-full h-full snap-center flex items-center justify-center p-20 gap-16">
+        <section className="min-w-full h-full snap-center flex items-center justify-center p-20 gap-16 relative">
           <div className="w-1/2 space-y-8">
             <div className="inline-block px-4 py-1 bg-brand-red/20 border border-brand-red text-brand-red text-[10px] font-black uppercase tracking-widest rounded-full">
               The Identity
@@ -123,17 +121,35 @@ export default function About() {
           <div className="w-1/3 flex justify-center">
             <img src={myLogo} alt="Logo" className="w-full max-w-sm drop-shadow-[0_0_50px_rgba(186,60,61,0.4)] animate-pulse" />
           </div>
+          <div className="absolute right-10 bottom-10 flex flex-col items-center gap-4 group">
+            <div className="flex items-center gap-3">
+              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white/30 group-hover:text-brand-yellow transition-colors duration-500">
+                Swipe Right to Explore
+              </span>
+              <div className="w-20 h-px bg-white/10 relative overflow-hidden">
+                <motion.div
+                  initial={{ x: "-100%" }}
+                  animate={{ x: "100%" }}
+                  transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+                  className="absolute inset-0 bg-brand-yellow"
+                />
+              </div>
+            </div>
+            <motion.div
+              animate={{ x: [0, 10, 0] }}
+              transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+              className="p-3 rounded-full border border-white/10 bg-white/5 text-white/40"
+            >
+              <ChevronRight size={20} />
+            </motion.div>
+          </div>
         </section>
-
-        {/* SLIDE 2: VISIONARIES */}
         <section className="min-w-full h-full snap-center flex items-center justify-between px-16 bg-brand-darkbrown relative overflow-hidden">
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
             <span className="text-[25vw] font-black uppercase italic text-white/2 leading-none -rotate-12 translate-y-10">
               Visionaries
             </span>
           </div>
-
-          {/* Lanyard Left */}
           <div className="flex-1 flex flex-col justify-center items-center perspective-1000 relative z-10">
             <div className="absolute left-10 top-1/4 space-y-4 opacity-40 group-hover:opacity-100 transition-opacity hidden xl:block text-right">
               <div className="text-[10px] font-bold text-brand-red uppercase tracking-widest">Experience</div>
@@ -181,8 +197,6 @@ export default function About() {
               </div>
             </motion.div>
           </div>
-
-          {/* Middle Content */}
           <div className="w-1/3 text-center space-y-10 z-20 px-6">
             <div className="inline-block px-4 py-1.5 bg-white/5 border border-white/10 rounded-full mb-4">
               <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-brand-yellow">Mindset Behind Titik Koma</span>
@@ -211,8 +225,6 @@ export default function About() {
               </div>
             </div>
           </div>
-
-          {/* Lanyard Right */}
           <div className="flex-1 flex flex-col justify-center items-center perspective-1000 relative z-10">
             <div className="absolute right-10 bottom-1/4 space-y-4 opacity-40 group-hover:opacity-100 transition-opacity hidden xl:block text-left">
               <div className="text-[10px] font-bold text-brand-yellow uppercase tracking-widest">Portfolio</div>
@@ -311,9 +323,7 @@ export default function About() {
               ))}
             </div>
           </div>
-        </section>F
-
-        {/* SLIDE 4: THE ARCHITECTS */}
+        </section>
         <section className="min-w-full h-full snap-center flex flex-col items-center justify-center p-20 bg-brand-darkbrown relative">
           <div className="max-w-7xl w-full">
             <div className="text-center mb-16 space-y-4">
@@ -329,75 +339,111 @@ export default function About() {
             </div>
           </div>
         </section>
+        <section className="min-w-full h-full snap-center flex items-center justify-center p-20 bg-brand-darkbrown/50 relative overflow-hidden">
+          <div className="absolute -left-20 -top-20 w-96 h-96 bg-brand-yellow/5 blur-[120px] rounded-full opacity-50" />
+          <div className="absolute -right-20 -bottom-20 w-96 h-96 bg-brand-red/5 blur-[120px] rounded-full opacity-50" />
 
-        {/* SLIDE 5: TECH STACK & CAPABILITIES */}
-        <section className="min-w-full h-full snap-center flex items-center justify-center p-20 bg-black/30">
-          <div className="max-w-7xl w-full grid grid-cols-4 grid-rows-2 gap-4 h-[70vh]">
-            <div className="col-span-2 row-span-1 bg-brand-red rounded-[3rem] p-10 flex flex-col justify-end relative overflow-hidden group">
-              <div className="absolute top-10 right-10 opacity-20 group-hover:rotate-12 transition-transform duration-500">
-                <Rocket size={120} />
+          <div className="max-w-7xl w-full grid grid-cols-4 grid-rows-2 gap-6 h-[75vh] relative z-10">
+            <div className="col-span-2 row-span-1 bg-zinc-900/80 border border-white/10 rounded-[3.5rem] p-12 flex flex-col justify-between group hover:border-brand-red/40 transition-all duration-500 backdrop-blur-xl relative overflow-hidden">
+              <div className="space-y-6">
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-brand-red/20 border border-brand-red/30 rounded-full">
+                  <div className="w-1.5 h-1.5 rounded-full bg-brand-red animate-pulse" />
+                  <span className="text-[10px] font-black uppercase tracking-widest text-brand-red">Specialized Ecosystem</span>
+                </div>
+                <h3 className="text-5xl font-black italic uppercase leading-[0.9] text-white tracking-tighter">
+                  <TextType text="Integrated Digital Solutions" className="text-white" />
+                  <br />
+                  <span className="text-brand-yellow">Ecosystem.</span>
+                </h3>
               </div>
-              <h3 className="text-4xl font-black italic uppercase leading-none mb-4 text-white">Mastering the <br /> Digital Frontier</h3>
-              <p className="text-sm text-white/70 max-w-xs font-medium uppercase tracking-wider">Kami menggunakan teknologi mutakhir untuk memastikan skalabilitas dan performa maksimal.</p>
-            </div>
-            <div className="col-span-1 bg-white/5 border border-white/10 rounded-[3rem] p-8 flex flex-col justify-between hover:bg-white/10 transition-colors group">
-              <div className="w-12 h-12 bg-brand-yellow/20 rounded-2xl flex items-center justify-center text-brand-yellow group-hover:scale-110 transition-transform"><Target size={24} /></div>
-              <div>
-                <h4 className="font-black italic uppercase text-xl">Full-Stack</h4>
-                <p className="text-[10px] text-white/40 font-bold uppercase tracking-widest mt-1">Laravel • React • Node.js</p>
-              </div>
-            </div>
-            <div className="col-span-1 bg-white/5 border border-white/10 rounded-[3rem] p-8 flex flex-col justify-between hover:bg-white/10 transition-colors group">
-              <div className="w-12 h-12 bg-brand-red/20 rounded-2xl flex items-center justify-center text-brand-red group-hover:scale-110 transition-transform"><Users size={24} /></div>
-              <div>
-                <h4 className="font-black italic uppercase text-xl">Cloud Native</h4>
-                <p className="text-[10px] text-white/40 font-bold uppercase tracking-widest mt-1">AWS • Docker • Vercel</p>
+              <div className="relative">
+                <p className="text-sm text-white/50 max-w-sm font-medium leading-relaxed italic border-l-2 border-brand-red/30 pl-4 mb-6">
+                  Kami menciptakan ekosistem digital yang cerdas, adaptif, dan berpusat pada pengalaman manusia.
+                </p>
+                <div className="w-full h-px bg-linear-to-r from-brand-red/50 via-brand-yellow/20 to-transparent opacity-30" />
               </div>
             </div>
-            <div className="col-span-1 bg-white/5 border border-white/10 rounded-[3rem] p-8 flex flex-col items-center justify-center text-center gap-4 hover:bg-white/10 transition-colors">
-              <div className="text-5xl font-black italic text-brand-yellow"><CountUp to={99} />.9%</div>
-              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/40">Uptime Reliability</span>
-            </div>
-            <div className="col-span-3 bg-brand-yellow rounded-[3rem] p-10 flex items-center justify-between group cursor-pointer overflow-hidden relative">
-              <div className="space-y-2 relative z-10">
-                <h3 className="text-4xl font-black italic uppercase text-brand-darkbrown leading-none">Ready to start <br /> a new project?</h3>
-                <p className="text-brand-darkbrown/60 text-xs font-bold uppercase tracking-widest">Mari transformasikan ide Anda menjadi realitas digital.</p>
+            <div className="col-span-1 bg-white/5 border border-white/10 rounded-[3.5rem] p-8 flex flex-col items-center text-center group hover:bg-white/8 transition-all duration-500">
+              <div className="w-14 h-14 bg-brand-red/10 rounded-2xl flex items-center justify-center text-brand-red mb-6 group-hover:scale-110 transition-transform">
+                <Code2 size={28} />
               </div>
-              <div className="w-20 h-20 bg-brand-darkbrown rounded-full flex items-center justify-center text-brand-yellow group-hover:scale-110 transition-transform duration-500 relative z-10">
-                <ChevronRight size={40} />
+              <h4 className="font-black italic uppercase text-xl mb-4">Web & Mobile</h4>
+              <div className="flex flex-wrap justify-center gap-1.5">
+                {['React', 'Laravel', 'Flutter', 'Next.js'].map(tech => (
+                  <span key={tech} className="px-2.5 py-1 bg-white/5 rounded-md text-[8px] font-bold uppercase text-white/40 border border-white/5 group-hover:bg-brand-red group-hover:text-white transition-all">
+                    {tech}
+                  </span>
+                ))}
               </div>
-              <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
             </div>
+            <div className="col-span-1 bg-white/5 border border-white/10 rounded-[3.5rem] p-8 flex flex-col group hover:bg-white/8 transition-all duration-500">
+              <div className="flex justify-between items-start mb-6">
+                <div className="w-12 h-12 bg-brand-yellow/10 rounded-2xl flex items-center justify-center text-brand-yellow group-hover:rotate-12 transition-transform">
+                  <Target size={24} />
+                </div>
+                <div className="text-right">
+                  <span className="text-[8px] font-black text-white/30 uppercase tracking-widest">Neural Load</span>
+                  <div className="text-sm font-mono text-brand-yellow">ACTIVE</div>
+                </div>
+              </div>
+              <h4 className="font-black italic uppercase text-xl mb-4 text-center">AI & Data</h4>
+              <div className="mt-auto h-16 flex items-end justify-between gap-1 opacity-40 group-hover:opacity-100 transition-opacity duration-700">
+                {[40, 70, 45, 90, 65, 80, 50, 95].map((h, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ height: 0 }}
+                    whileInView={{ height: `${h}%` }}
+                    transition={{ delay: i * 0.1, duration: 1, repeat: Infinity, repeatType: "reverse" }}
+                    className="w-full bg-brand-yellow/50 rounded-t-sm"
+                  />
+                ))}
+              </div>
+            </div>
+            <div className="col-span-1 bg-zinc-900/50 border border-white/10 rounded-[3.5rem] p-8 flex flex-col justify-center group overflow-hidden relative">
+              <div className="absolute inset-0 bg-brand-yellow/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+              <Palette className="text-white/20 mb-4 group-hover:text-brand-yellow transition-colors mx-auto" size={32} />
+              <h4 className="font-black italic uppercase text-lg text-center text-white/90">UX Precision</h4>
+              <div className="space-y-2 mt-4">
+                <div className="flex justify-between text-[8px] font-bold text-white/40 uppercase tracking-tighter">
+                  <span>Reliability</span>
+                  <span className="text-brand-yellow">99.9%</span>
+                </div>
+                <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    whileInView={{ width: "99.9%" }}
+                    transition={{ duration: 2, ease: "easeOut" }}
+                    className="h-full bg-brand-yellow shadow-[0_0_10px_rgba(255,219,0,0.5)]"
+                  />
+                </div>
+              </div>
+
+              <div className="mt-4 pt-4 border-t border-white/5 text-center">
+                <div className="text-3xl font-black italic text-brand-yellow"><CountUp to={99} />.9%</div>
+              </div>
+            </div>
+            <div className="col-span-3 bg-brand-yellow rounded-[3.5rem] p-12 flex items-center justify-between group cursor-pointer overflow-hidden relative shadow-[0_0_50px_rgba(255,219,0,0.1)]">
+              <div className="space-y-4 relative z-10">
+                <h3 className="text-5xl font-black italic uppercase text-brand-darkbrown leading-none tracking-tighter">
+                  Ready to start <br />
+                  <span className="opacity-80">a new project?</span>
+                </h3>
+                <p className="text-brand-darkbrown/60 text-sm font-bold uppercase tracking-widest max-w-md italic">
+                  Mari transformasikan ide Anda menjadi realitas digital.
+                </p>
+              </div>
+
+              <motion.div
+                whileHover={{ scale: 1.1, x: 5 }}
+                className="w-24 h-24 bg-brand-darkbrown rounded-full flex items-center justify-center text-brand-yellow relative z-10 shadow-2xl transition-transform"
+              >
+                <ChevronRight size={48} />
+              </motion.div>
+              <div className="absolute top-0 right-0 w-80 h-80 bg-white/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none group-hover:bg-white/30 transition-all duration-700" />
+            </div>
+
           </div>
         </section>
-
-        {/* SLIDE 6: FINAL CALL */}
-        <section className="min-w-full h-full snap-center flex flex-col items-center justify-center p-20 relative bg-brand-darkbrown">
-          <div className="text-center space-y-12 relative z-10">
-            <div className="space-y-4">
-              <span className="text-brand-red font-black tracking-[0.5em] text-xs uppercase animate-pulse">The Final Chapter</span>
-              <h2 className="text-[10vw] font-black italic uppercase tracking-tighter leading-[0.8] text-white">
-                LET'S <span className="text-brand-red">BUILD</span> <br />
-                TOGETHER<span className="text-brand-yellow">.</span>
-              </h2>
-            </div>
-            <div className="flex gap-6 justify-center">
-              <button className="px-12 py-5 bg-brand-red rounded-full font-black italic uppercase tracking-widest hover:bg-white hover:text-brand-red transition-all duration-300 hover:scale-105 shadow-[0_0_30px_rgba(186,60,61,0.3)] group flex items-center gap-2">
-                Start Project <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
-              </button>
-              <button className="px-12 py-5 border-2 border-white/20 rounded-full font-black italic uppercase tracking-widest hover:border-brand-yellow hover:text-brand-yellow transition-all duration-300">
-                Our Method
-              </button>
-            </div>
-            <div className="pt-20 opacity-20">
-              <p className="text-[10px] font-mono tracking-widest uppercase italic">© 2026 Titik Koma Ecosystem • Surabaya, Indonesia</p>
-            </div>
-          </div>
-          <div className="absolute bottom-0 right-0 p-10 opacity-[0.03] grayscale contrast-200 pointer-events-none scale-150">
-            <img src={myLogo} alt="bg" className="w-[40vw]" />
-          </div>
-        </section>
-
       </div>
 
       <style>{`
