@@ -243,7 +243,7 @@ export default function Home() {
                             onClick={() => window.location.href = '/services'}
                             className="group flex items-center gap-3 px-8 py-4 bg-white/5 border border-white/10 hover:border-brand-yellow/50 rounded-full transition-all backdrop-blur-sm active:scale-95"
                         >
-                            <span className="text-sm font-bold tracking-widest text-white uppercase">Eksplor Layanan Kami</span>
+                            <span className="text-sm font-bold tracking-widest text-white uppercase">Eksplor Our Services</span>
                             <span className="text-brand-yellow group-hover:translate-x-1 transition-transform">→</span>
                         </button>
                     </AnimatedContent>
@@ -292,7 +292,7 @@ export default function Home() {
                                 onClick={() => window.location.href = '/about'}
                                 className="group flex items-center gap-3 px-8 py-4 bg-brand-yellow text-brand-darkbrown font-black rounded-2xl hover:bg-white hover:scale-105 transition-all shadow-xl shadow-brand-yellow/10"
                             >
-                                <span className="text-sm tracking-tighter uppercase">Kenali Tim di Balik Layar</span>
+                                <span className="text-sm tracking-tighter uppercase">About Us</span>
                                 <span className="group-hover:translate-x-1 transition-transform">→</span>
                             </button>
                         </div>
@@ -322,10 +322,10 @@ export default function Home() {
 
                                 <div className="pt-2">
                                     <button
-                                        onClick={() => window.location.href = '/contact'}
+                                        onClick={() => window.location.href = '/FaQ'}
                                         className="group inline-flex items-center gap-5 px-8 py-4 rounded-xl bg-white text-brand-darkbrown font-black uppercase tracking-widest hover:bg-brand-yellow transition-all duration-300 shadow-xl"
                                     >
-                                        <span>Mulai Konsultasi</span>
+                                        <span>More Question</span>
                                         <span className="w-7 h-7 rounded-full bg-brand-darkbrown text-white flex items-center justify-center group-hover:translate-x-1 transition-transform">
                                             →
                                         </span>
