@@ -2,7 +2,6 @@ import { motion, useScroll } from 'framer-motion';
 import { useRef } from 'react';
 import { usePage } from '@inertiajs/react';
 import { RippleGrid } from '../components/About/Ripple';
-import { FloatingSkills } from '../components/About/FloatingSkills';
 import { TeamCard } from '../components/About/TeamCard';
 import TextType from '../components/About/TextType';
 import PillNav from '../components/PillNav';

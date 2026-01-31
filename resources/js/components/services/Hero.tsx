@@ -59,7 +59,9 @@ export default function ServiceHero() {
                     </p>
 
                     <div className="flex gap-5 justify-center">
-                        <button className="px-12 py-5 bg-white text-brand-darkbrown font-black rounded-full uppercase text-sm hover:scale-105 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] transition-all active:scale-95">
+                        <button 
+                        onClick={() => (window.location.href = '/contact')}
+                        className="px-12 py-5 bg-white text-brand-darkbrown font-black rounded-full uppercase text-sm hover:scale-105 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] transition-all active:scale-95">
                             Start Project →
                         </button>
                     </div>
