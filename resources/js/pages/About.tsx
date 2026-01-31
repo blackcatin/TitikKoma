@@ -28,9 +28,8 @@ interface TeamMember {
   quote: string;
   stats: { label: string; value: string; }[];
   icon: 'code' | 'design' | 'strategy';
-  linkedin: string;  // Tambahkan ini
-  portfolio: string; // Tambahkan ini
-}
+  linkedin: string;  
+  portfolio: string; }
 
 const teamMembers: TeamMember[] = [
   {
@@ -434,6 +433,7 @@ export default function About() {
               </div>
 
               <motion.div
+              onClick={() => window.location.href = '/services'}
                 whileHover={{ scale: 1.1, x: 5 }}
                 className="w-24 h-24 bg-brand-darkbrown rounded-full flex items-center justify-center text-brand-yellow relative z-10 shadow-2xl transition-transform"
               >

@@ -10,8 +10,6 @@ import { ChevronRight, MessageSquare, Terminal, Cpu, ShieldCheck, Box } from 'lu
 export default function FaQPage() {
     const { url } = usePage();
     const [activeIndex, setActiveIndex] = useState(0);
-
-    // Ikon latar belakang yang berubah sesuai kategori aktif
     const getCategoryIcon = (category: string) => {
         const props = { size: 400, strokeWidth: 0.5, className: "transition-all duration-1000" };
         if (category === 'Technical') return <Cpu {...props} />;
@@ -21,17 +19,13 @@ export default function FaQPage() {
 
     return (
         <div className="relative h-screen w-screen bg-brand-darkbrown text-white font-sans overflow-hidden uppercase select-none">
-            {/* BACKGROUND LAYER */}
             <div className="absolute inset-0 z-0 opacity-10 pointer-events-none">
                 <RippleGrid gridColor="#ba3c3d" opacity={0.2} />
             </div>
-
-            {/* DYNAMIC BACKGROUND ICON */}
             <div className="fixed -right-20 top-1/2 -translate-y-1/2 opacity-[0.02] text-white pointer-events-none transition-all duration-1000 ease-in-out z-0">
                 {getCategoryIcon(faqData[activeIndex].category)}
             </div>
 
-            {/* NAVIGATION HEADER */}
             <header className="fixed top-0 left-0 w-full z-50 py-6">
                 <PillNav logo={myLogo} items={[
                     { label: 'Home', href: '/' },
@@ -42,14 +36,11 @@ export default function FaQPage() {
                     { label: 'Contact', href: '/contact' },
                 ]} activeHref={url} baseColor="#ba3c3d" />
             </header>
-
-            {/* MAIN INTERFACE (FULL SCREEN) */}
             <main className="relative z-10 h-full w-full max-w-7xl mx-auto px-8 pt-32 pb-12 flex flex-col lg:flex-row gap-8 items-stretch">
-                
-                {/* LEFT COLUMN: THE PROTOCOL LIST */}
+
                 <div className="w-full lg:w-[45%] flex flex-col justify-between py-4">
                     <div className="space-y-2 mb-8">
-                        <motion.div 
+                        <motion.div
                             initial={{ x: -20, opacity: 0 }}
                             animate={{ x: 0, opacity: 1 }}
                             className="flex items-center gap-3 text-brand-red font-black tracking-[0.6em] text-[9px]"
@@ -62,18 +53,16 @@ export default function FaQPage() {
                         </h1>
                     </div>
 
-                    {/* Scrollable List Container */}
                     <div className="flex-1 overflow-y-auto pr-4 space-y-3 hide-scrollbar">
                         {faqData.map((faq, i) => (
-                            <motion.div 
+                            <motion.div
                                 key={i}
                                 onMouseEnter={() => setActiveIndex(i)}
                                 onClick={() => setActiveIndex(i)}
-                                className={`relative group cursor-pointer p-5 rounded-2xl border transition-all duration-500 overflow-hidden ${
-                                    activeIndex === i 
-                                    ? 'bg-brand-red border-brand-red shadow-xl' 
-                                    : 'bg-white/2 border-white/5 hover:border-white/20'
-                                }`}
+                                className={`relative group cursor-pointer p-5 rounded-2xl border transition-all duration-500 overflow-hidden ${activeIndex === i
+                                        ? 'bg-brand-red border-brand-red shadow-xl'
+                                        : 'bg-white/2 border-white/5 hover:border-white/20'
+                                    }`}
                             >
                                 <div className="flex items-center justify-between relative z-10">
                                     <div className="flex items-center gap-4">
@@ -93,10 +82,9 @@ export default function FaQPage() {
                         ))}
                     </div>
 
-                    {/* FOOTER CTA */}
                     <div className="pt-8 border-t border-white/5 flex items-center justify-between">
-                        <button 
-                            onClick={() => window.location.href = '/contact'}
+                        <button
+                            onClick={() => window.location.href = '/contact?type=inquiry'} // Tambahkan ?type=inquiry
                             className="group flex items-center gap-4 text-brand-yellow font-black tracking-widest text-[9px] hover:text-white transition-colors"
                         >
                             <div className="p-3 rounded-xl border border-brand-yellow/30 group-hover:bg-brand-yellow group-hover:text-brand-darkbrown transition-all">
@@ -105,13 +93,12 @@ export default function FaQPage() {
                             BYPASS FAQ & CONNECT TO ARCHITECTS
                         </button>
                         <div className="flex gap-2">
-                             <div className="w-1 h-1 rounded-full bg-white/20" />
-                             <div className="w-1 h-1 rounded-full bg-brand-yellow animate-bounce" />
+                            <div className="w-1 h-1 rounded-full bg-white/20" />
+                            <div className="w-1 h-1 rounded-full bg-brand-yellow animate-bounce" />
                         </div>
                     </div>
                 </div>
 
-                {/* RIGHT COLUMN: THE BLUEPRINT CONTENT */}
                 <div className="w-full lg:w-[55%] relative">
                     <AnimatePresence mode="wait">
                         <motion.div
@@ -122,7 +109,6 @@ export default function FaQPage() {
                             transition={{ duration: 0.5, ease: "circOut" }}
                             className="h-full w-full bg-zinc-900/60 border border-white/10 rounded-[3.5rem] p-10 md:p-16 backdrop-blur-3xl flex flex-col justify-between overflow-hidden shadow-3xl relative"
                         >
-                            {/* Decorative Watermark */}
                             <div className="absolute top-0 right-0 p-12 opacity-5 font-mono text-[200px] leading-none select-none italic font-black">
                                 0{activeIndex + 1}
                             </div>
@@ -139,7 +125,7 @@ export default function FaQPage() {
                                 <h2 className="text-3xl md:text-5xl font-black italic text-white leading-[0.9] tracking-tighter">
                                     {faqData[activeIndex].q}
                                 </h2>
-                                
+
                                 <div className="space-y-6">
                                     <p className="text-gray-400 text-lg md:text-2xl leading-relaxed italic border-l-4 border-brand-red pl-10 lowercase font-medium">
                                         {faqData[activeIndex].a}
@@ -160,7 +146,6 @@ export default function FaQPage() {
                                 </div>
                             </div>
 
-                            {/* UI TEXTURE (SCANLINES) */}
                             <div className="absolute inset-0 pointer-events-none opacity-[0.04] bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-size-[100%_2px,3px_100%]" />
                         </motion.div>
                     </AnimatePresence>

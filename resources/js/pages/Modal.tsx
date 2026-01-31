@@ -1,8 +1,8 @@
 import { X, CheckCircle2, Zap, Target, Layers, ArrowRight, Sparkles, HelpCircle } from 'lucide-react';
-import * as Icons from "lucide-react"; 
+import * as Icons from "lucide-react";
 import React, { useEffect } from 'react';
 interface ServiceData {
-    icon: string; 
+    icon: string;
     title: string;
     desc: string;
     fullDesc?: string;
@@ -130,7 +130,7 @@ export default function ServiceModal({ isOpen, onClose, data }: ModalProps) {
 
                         <div className="relative group p-6 rounded-[2rem] bg-brand-yellow border border-white/20 shadow-2xl shadow-brand-yellow/5 overflow-hidden flex flex-col justify-between">
                             <div className="absolute -top-10 -right-10 w-28 h-28 bg-white/20 blur-2xl rounded-full pointer-events-none" />
-                            
+
                             <div>
                                 <h4 className="text-[9px] font-black uppercase tracking-[0.3em] text-brand-darkbrown/80 mb-1">Estimated Investment</h4>
                                 <div className="text-3xl font-black text-brand-darkbrown tracking-tight mb-2 italic leading-none">
@@ -140,9 +140,18 @@ export default function ServiceModal({ isOpen, onClose, data }: ModalProps) {
                                     *Investment varies based on project complexity and scope.
                                 </p>
                             </div>
-
                             <button
-                                onClick={() => window.location.href = '/contact'}
+                                onClick={() => {
+                                    let type = 'web'; 
+                                    const category = data.category.toLowerCase();
+
+                                    if (category.includes('web')) type = 'web';
+                                    else if (category.includes('mobile')) type = 'mobile';
+                                    else if (category.includes('ai') || category.includes('data')) type = 'aidata';
+                                    else if (category.includes('design') || category.includes('ux')) type = 'uiux';
+
+                                    window.location.href = `/contact?type=${type}`;
+                                }}
                                 className="w-full mt-6 py-3 rounded-xl bg-brand-darkbrown text-white font-black text-[10px] uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-black hover:scale-[1.02] transition-all duration-300"
                             >
                                 GET QUOTE <ArrowRight size={12} />
