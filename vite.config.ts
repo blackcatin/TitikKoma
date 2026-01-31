@@ -21,6 +21,7 @@ export default defineConfig({
             formVariants: true,
         }),
     ],
+    assetsInclude: ['**/*.glb'], 
     esbuild: {
         jsx: 'automatic',
     },
